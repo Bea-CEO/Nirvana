@@ -26,4 +26,7 @@ public interface IDataGenHelper {
     void wildHemp(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider);
 
     void wildHemp(RegistrateBlockLootTables provider, Block block);
+
+    void pipe(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider);
+
 }

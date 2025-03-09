@@ -172,4 +172,10 @@ public class FabricDataGenHelper implements IDataGenHelper {
                 ))
         ));
     }
+
+    @Override
+    public void pipe(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider) {
+        var parent = new ResourceLocation(NirvanaConstants.MOD_ID, "item/pipe_in_hand");
+        provider.withExistingParent(context.getName(), parent).texture("layer0", provider.itemTexture(context));
+    }
 }

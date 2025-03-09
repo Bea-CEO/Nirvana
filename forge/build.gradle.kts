@@ -1,4 +1,5 @@
 import net.minecraftforge.gradle.common.util.MinecraftExtension
+import net.minecraftforge.gradle.userdev.jarjar.JarJarProjectExtension
 import org.spongepowered.asm.gradle.plugins.MixinExtension
 
 val mc_version: String by extra
@@ -10,6 +11,8 @@ val fd_forge_version: String by extra
 val create_forge_version: String by extra
 val flywheel_forge_version: String by extra
 val freecam_forge_version: String by extra
+val ponder_forge_version: String by extra
+val mixin_extras_version: String by extra
 
 forge {
     enableMixins()
@@ -31,19 +34,29 @@ configure<MinecraftExtension> {
     }
 }
 
+val jarJar = the<JarJarProjectExtension>()
+
 dependencies {
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")!!)
+    implementation("jarJar"("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
+        jarJar.ranged(this, "[${mixin_extras_version},)")
+    }
+    implementation("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")
+
     modCompileOnly("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     modImplementation("com.simibubi.create:create-${mc_version}:${create_forge_version}:slim") {
         isTransitive = false
     }
+    modImplementation("net.createmod.ponder:Ponder-Forge-${mc_version}:${ponder_forge_version}")
+
 
     if (!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-forge:${jei_version}")
         modRuntimeOnly("maven.modrinth:just-enough-effect-descriptions-jeed:${jeed_version}")
         modRuntimeOnly("maven.modrinth:farmers-delight:${fd_forge_version}")
         modRuntimeOnly("maven.modrinth:freecam:${freecam_forge_version}")
-        modRuntimeOnly("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_forge_version}")
+        modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_forge_version}")
     }
 }
 

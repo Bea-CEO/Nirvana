@@ -55,4 +55,9 @@ public class ForgeDataGenHelper implements IDataGenHelper {
     public void wildHemp(RegistrateBlockLootTables provider, Block block) {
         NOOP();
     }
+
+    @Override
+    public void pipe(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider) {
+        NOOP();
+    }
 }

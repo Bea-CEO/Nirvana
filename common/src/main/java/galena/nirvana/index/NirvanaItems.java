@@ -152,6 +152,7 @@ public class NirvanaItems {
             .item("old_pipe", Item::new)
             .properties(it -> it.stacksTo(1))
             .properties(it -> it.rarity(Rarity.RARE))
+            .model(Services.DATAGEN::pipe)
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .register();
 
@@ -159,6 +160,7 @@ public class NirvanaItems {
             .item("suspicious_pipe", SuspiciousPipeItem::new)
             .properties(it -> it.stacksTo(1))
             .properties(it -> it.rarity(Rarity.RARE))
+            .model(Services.DATAGEN::pipe)
             .tag(NirvanaTags.SMOKING_ITEM)
             .transform(it -> it.tab(CreativeModeTabs.TOOLS_AND_UTILITIES, NirvanaItems.addSuspiciousStack(it)))
             .register();

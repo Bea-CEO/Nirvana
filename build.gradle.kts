@@ -1,3 +1,5 @@
+val mixin_extras_version: String by extra
+
 plugins {
     id("com.possible-triangle.gradle") version ("0.2.5")
 }
@@ -15,12 +17,20 @@ subprojects {
             }
         }
 
+
         maven {
             url = uri("https://maven.tterrag.com/")
             content {
                 includeGroup("com.tterrag.registrate")
-                includeGroup("com.jozufozu.flywheel")
+            }
+        }
+
+        maven {
+            url = uri("https://maven.createmod.net")
+            content {
                 includeGroup("com.simibubi.create")
+                includeGroup("net.createmod.ponder")
+                includeGroup("dev.engine-room.flywheel")
             }
         }
 
