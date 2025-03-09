@@ -1,16 +1,16 @@
 package galena.nirvana.mixins;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import galena.nirvana.index.NirvanaEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Mob.class)
 public abstract class MobMixin {
 
-    @Redirect(
+    @WrapWithCondition(
             method = "serverAiStep()V",
             at = @At(
                     value = "INVOKE",
@@ -18,14 +18,13 @@ public abstract class MobMixin {
                     ordinal = 0
             )
     )
-    public void interruptTargetGoal(GoalSelector targetSelector, boolean argument) {
+    public boolean interruptTargetGoal(GoalSelector targetSelector, boolean argument) {
         @SuppressWarnings("DataFlowIssue")
         var self = (Mob) (Object) (this);
-        if(self.hasEffect(NirvanaEffects.PEACE.get())) return;
-        targetSelector.tickRunningGoals(argument);
+        return !self.hasEffect(NirvanaEffects.PEACE.get());
     }
 
-    @Redirect(
+    @WrapWithCondition(
             method = "serverAiStep()V",
             at = @At(
                     value = "INVOKE",
@@ -33,11 +32,10 @@ public abstract class MobMixin {
                     ordinal = 0
             )
     )
-    public void interruptTargetGoal(GoalSelector targetSelector) {
+    public boolean interruptTargetGoal(GoalSelector targetSelector) {
         @SuppressWarnings("DataFlowIssue")
         var self = (Mob) (Object) (this);
-        if(self.hasEffect(NirvanaEffects.PEACE.get())) return;
-        targetSelector.tick();
+        return !self.hasEffect(NirvanaEffects.PEACE.get());
     }
 
 }
