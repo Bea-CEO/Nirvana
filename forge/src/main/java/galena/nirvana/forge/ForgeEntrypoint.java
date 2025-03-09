@@ -4,6 +4,8 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.NirvanaCommon;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.forge.client.ForgeClientEntrypoint;
+import galena.nirvana.forge.world.AddItemLootModifier;
+import galena.nirvana.forge.world.ReplaceItemLootModifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +25,11 @@ public class ForgeEntrypoint {
         REGISTRATE.get()
                 .object("replace_item")
                 .generic(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> ReplaceItemLootModifier.CODEC)
+                .register();
+
+        REGISTRATE.get()
+                .object("add_item")
+                .generic(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> AddItemLootModifier.CODEC)
                 .register();
     }
 

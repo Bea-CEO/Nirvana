@@ -19,7 +19,7 @@ public class HerbalSalveItem extends SuspiciousStewItem {
     }
 
     private static List<MobEffectInstance> getEffects(ItemStack stack) {
-        return SuspiciousItem.getEffects(stack, Services.CONFIG.common().herbalSalveDuration());
+        return SuspiciousItem.getEffects(stack, 160 * Services.CONFIG.common().herbalSalveFactor());
     }
 
     @Override

@@ -3,6 +3,7 @@ package galena.nirvana.world.item;
 import galena.nirvana.index.NirvanaEffects;
 import galena.nirvana.world.effects.IStackingEffect;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.gui.screens.social.PlayerEntry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
@@ -84,8 +85,10 @@ public abstract class SmokingItem extends Item {
         ));
     }
 
-    private static ItemStack takeHit(ItemStack stack) {
+    public static ItemStack takeHit(Player player, ItemStack stack) {
+        if(player.getAbilities().instabuild) return stack;
         var remainder = stack.getItem().getCraftingRemainingItem();
+
 
         if (stack.isDamageableItem()) {
             stack.setDamageValue(stack.getDamageValue() + 1);
@@ -97,7 +100,11 @@ public abstract class SmokingItem extends Item {
         }
 
         if (stack.isEmpty()) {
-            if (remainder != null) return remainder.getDefaultInstance();
+            if (remainder != null) {
+                var remainderStack = remainder.getDefaultInstance();
+                player.getInventory().add(remainderStack);
+                return remainderStack;
+            }
         }
 
         return stack;
@@ -119,14 +126,7 @@ public abstract class SmokingItem extends Item {
 
         if (entity instanceof Player player) {
             player.awardStat(Stats.ITEM_USED.get(this));
-            if (!player.getAbilities().instabuild) {
-                var consumed = takeHit(stack);
-
-                if (stack.isEmpty()) {
-                    player.getInventory().add(consumed);
-                    return consumed;
-                }
-            }
+            return takeHit(player, stack);
         }
 
         return stack;

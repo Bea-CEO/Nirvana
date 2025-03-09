@@ -26,13 +26,15 @@ public class SuspicousCraftingRecipe extends CustomRecipe {
     private final Item base;
     private final int requiredFlowers;
     private final int requiredWeed;
+    private final int durationFactor;
 
-    public SuspicousCraftingRecipe(ResourceLocation id, CraftingBookCategory category, Item result, Item base, int requiredFlowers, int requiredWeed) {
+    public SuspicousCraftingRecipe(ResourceLocation id, CraftingBookCategory category, Item result, Item base, int requiredFlowers, int requiredWeed, int durationFactor) {
         super(id, category);
         this.result = result;
         this.base = base;
         this.requiredFlowers = requiredFlowers;
         this.requiredWeed = requiredWeed;
+        this.durationFactor = durationFactor;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class SuspicousCraftingRecipe extends CustomRecipe {
             if (!stack.isEmpty()) {
                 SuspiciousEffectHolder suspiciousEffectHolder = SuspiciousEffectHolder.tryGet(stack.getItem());
                 if (suspiciousEffectHolder != null) {
-                    SuspiciousStewItem.saveMobEffect(result, suspiciousEffectHolder.getSuspiciousEffect(), suspiciousEffectHolder.getEffectDuration());
+                    SuspiciousStewItem.saveMobEffect(result, suspiciousEffectHolder.getSuspiciousEffect(), suspiciousEffectHolder.getEffectDuration() * durationFactor);
                     break;
                 }
             }
@@ -99,7 +101,8 @@ public class SuspicousCraftingRecipe extends CustomRecipe {
             var base = GsonHelper.getAsItem(json, "base");
             var requiredFlowers = GsonHelper.getAsInt(json, "flowers", 1);
             var requiredWeed = GsonHelper.getAsInt(json, "weed", 1);
-            return new SuspicousCraftingRecipe(id, category, item, base, requiredFlowers, requiredWeed);
+            var durationFactor = GsonHelper.getAsInt(json, "durationFactor", 1);
+            return new SuspicousCraftingRecipe(id, category, item, base, requiredFlowers, requiredWeed, durationFactor);
         }
 
         @Override
@@ -109,7 +112,8 @@ public class SuspicousCraftingRecipe extends CustomRecipe {
             var base = buffer.readById(BuiltInRegistries.ITEM);
             var requiredFlowers = buffer.readInt();
             var requiredWeed = buffer.readInt();
-            return new SuspicousCraftingRecipe(id, category, item, base, requiredFlowers, requiredWeed);
+            var durationFactor = buffer.readInt();
+            return new SuspicousCraftingRecipe(id, category, item, base, requiredFlowers, requiredWeed, durationFactor);
         }
 
         @Override
@@ -119,6 +123,7 @@ public class SuspicousCraftingRecipe extends CustomRecipe {
             buffer.writeId(BuiltInRegistries.ITEM, recipe.base);
             buffer.writeInt(recipe.requiredFlowers);
             buffer.writeInt(recipe.requiredWeed);
+            buffer.writeInt(recipe.durationFactor);
         }
 
     }

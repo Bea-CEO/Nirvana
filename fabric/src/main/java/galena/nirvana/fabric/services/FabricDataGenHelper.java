@@ -3,6 +3,7 @@ package galena.nirvana.fabric.services;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
+import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaItems;
@@ -13,6 +14,8 @@ import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredM
 import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -177,5 +180,16 @@ public class FabricDataGenHelper implements IDataGenHelper {
     public void pipe(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider) {
         var parent = new ResourceLocation(NirvanaConstants.MOD_ID, "item/pipe_in_hand");
         provider.withExistingParent(context.getName(), parent).texture("layer0", provider.itemTexture(context));
+    }
+
+    @Override
+    public void stuffedPipe(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BREWING, NirvanaItems.STUFFED_PIPE)
+                .requires(NirvanaItems.EMPTY_PIPE)
+                .requires(NirvanaItems.WEED)
+                .requires(NirvanaItems.WEED)
+                .requires(NirvanaItems.WEED)
+                .unlockedBy("has_pipe", RegistrateRecipeProvider.has(NirvanaItems.EMPTY_PIPE))
+                .save(provider);
     }
 }

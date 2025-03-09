@@ -3,6 +3,7 @@ package galena.nirvana.forge.services;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
+import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import galena.nirvana.platform.services.IDataGenHelper;
 import net.minecraft.world.item.Item;
@@ -58,6 +59,11 @@ public class ForgeDataGenHelper implements IDataGenHelper {
 
     @Override
     public void pipe(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public void stuffedPipe(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider) {
         NOOP();
     }
 }

@@ -1,4 +1,4 @@
-package galena.nirvana.forge;
+package galena.nirvana.forge.world;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

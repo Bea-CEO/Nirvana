@@ -34,11 +34,15 @@ public class NirvanaCommonConfig {
         return 40;
     }
 
-    public int herbalSalveDuration() {
-        return 160 * 3;
+    public int herbalSalveFactor() {
+        return 3;
     }
 
-    public int suspiciousPipeDuration() {
-        return 160 * 3;
+    public int suspiciousPipeFactor() {
+        return 4;
+    }
+
+    public int getPipeHits() {
+        return 6;
     }
 }

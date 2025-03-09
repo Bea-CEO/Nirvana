@@ -32,7 +32,7 @@ public class NirvanaForgeJeiPlugin implements IModPlugin {
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         registration.registerSubtypeInterpreter(NirvanaItems.POTION_BONG.get(), NirvanaJeiCompat::interpretPotion);
         registration.registerSubtypeInterpreter(NirvanaItems.HERBAL_SALVE.get(), NirvanaJeiCompat::interpretSuspiciousItem);
-        registration.registerSubtypeInterpreter(NirvanaItems.FILLED_PIPE.get(), NirvanaJeiCompat::interpretSuspiciousItem);
+        registration.registerSubtypeInterpreter(NirvanaItems.SUSPICIOUS_PIPE.get(), NirvanaJeiCompat::interpretSuspiciousItem);
     }
 
 }

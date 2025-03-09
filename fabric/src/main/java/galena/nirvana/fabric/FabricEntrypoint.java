@@ -3,6 +3,7 @@ package galena.nirvana.fabric;
 import galena.nirvana.NirvanaCommon;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaBlocks;
+import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.index.NirvanaTags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -14,7 +15,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 
 public class FabricEntrypoint implements ModInitializer {
 
@@ -28,10 +31,25 @@ public class FabricEntrypoint implements ModInitializer {
         REGISTRATE.register();
 
         LootTableEvents.MODIFY.register((resources, manager, id, table, source) -> {
-            if (source.isBuiltin() && BuiltInLootTables.SNIFFER_DIGGING.equals(id)) {
+            if(!source.isBuiltin()) return;
+            if (BuiltInLootTables.SNIFFER_DIGGING.equals(id)) {
                 table.modifyPools(it -> {
                     it.add(LootItem.lootTableItem(NirvanaBlocks.BLISS_BLOOM));
                 });
+            }
+
+            else if (BuiltInLootTables.IGLOO_CHEST.equals(id)) {
+                table.withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(NirvanaItems.EMPTY_PIPE))
+                        .when(LootItemRandomChanceCondition.randomChance(0.1F))
+                );
+            }
+
+            else if (BuiltInLootTables.WOODLAND_MANSION.equals(id)) {
+                table.withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(NirvanaItems.EMPTY_PIPE))
+                        .when(LootItemRandomChanceCondition.randomChance(0.33F))
+                );
             }
         });
 

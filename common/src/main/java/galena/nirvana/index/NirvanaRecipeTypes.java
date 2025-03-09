@@ -37,7 +37,7 @@ public class NirvanaRecipeTypes {
             .generic("suspicious_crafting", Registries.RECIPE_SERIALIZER, SuspicousCraftingRecipe.Serializer::new)
             .register();
 
-    public static Stream<Pair<ItemLike, ItemStack>> getSuspiciousVariants(ItemLike output) {
+    public static Stream<Pair<ItemLike, ItemStack>> getSuspiciousVariants(ItemLike output, int factor) {
         return BuiltInRegistries.ITEM.getTag(ItemTags.SMALL_FLOWERS)
                 .stream()
                 .flatMap(HolderSet.ListBacked::stream)
@@ -49,17 +49,17 @@ public class NirvanaRecipeTypes {
                 .map(flower -> {
                     var outputStack = new ItemStack(output);
                     MobEffect mobeffect = flower.getSuspiciousEffect();
-                    SuspiciousStewItem.saveMobEffect(outputStack, mobeffect, flower.getEffectDuration());
+                    SuspiciousStewItem.saveMobEffect(outputStack, mobeffect, flower.getEffectDuration() * factor);
 
                     return new Pair<>(flower, outputStack);
                 });
     }
 
-    private static Stream<CraftingRecipe> createSuspiciousRecipes(Ingredient base, ItemLike result, int flowerCount, int weedCount) {
+    private static Stream<CraftingRecipe> createSuspiciousRecipes(Ingredient base, ItemLike result, int flowerCount, int weedCount, int factor) {
         var group = BuiltInRegistries.ITEM.getKey(result.asItem());
         var weed = Ingredient.of(NirvanaItems.WEED);
 
-        return getSuspiciousVariants(result).<CraftingRecipe>map(pair -> {
+        return getSuspiciousVariants(result, factor).<CraftingRecipe>map(pair -> {
             var flowerBlock = pair.getFirst().asItem();
             var output = pair.getSecond();
             var type = BuiltInRegistries.ITEM.getKey(flowerBlock);
@@ -77,8 +77,8 @@ public class NirvanaRecipeTypes {
 
     public static List<CraftingRecipe> createSuspiciousRecipes() {
         return Stream.of(
-                createSuspiciousRecipes(Ingredient.of(Items.BOWL), NirvanaItems.HERBAL_SALVE, 3, 3),
-                createSuspiciousRecipes(Ingredient.of(NirvanaItems.EMPTY_PIPE), NirvanaItems.FILLED_PIPE, 6, 1)
+                createSuspiciousRecipes(Ingredient.of(Items.BOWL), NirvanaItems.HERBAL_SALVE, 3, 3, Services.CONFIG.common().herbalSalveFactor()),
+                createSuspiciousRecipes(Ingredient.of(NirvanaItems.EMPTY_PIPE), NirvanaItems.SUSPICIOUS_PIPE, 6, 1, Services.CONFIG.common().suspiciousPipeFactor())
         ).flatMap(Function.identity()).toList();
     }
 

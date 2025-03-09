@@ -12,6 +12,7 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.NirvanaClient;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.item.BongItem;
+import galena.nirvana.world.item.FilledPipeItem;
 import galena.nirvana.world.item.HerbalSalveItem;
 import galena.nirvana.world.item.JointItem;
 import galena.nirvana.world.item.LazyFoodItem;
@@ -96,8 +97,8 @@ public class NirvanaItems {
                 .forEach(modifier::accept);
     }
 
-    private static <T extends Item> Consumer<CreativeModeTabModifier> addSuspiciousStack(ItemBuilder<T, ?> item) {
-        return modifier -> NirvanaRecipeTypes.getSuspiciousVariants(item.getEntry())
+    private static <T extends Item> Consumer<CreativeModeTabModifier> addSuspiciousStack(ItemBuilder<T, ?> item, int factor) {
+        return modifier -> NirvanaRecipeTypes.getSuspiciousVariants(item.getEntry(), factor)
                 .map(Pair::getSecond)
                 .forEach(modifier::accept);
     }
@@ -133,7 +134,7 @@ public class NirvanaItems {
             .item("herbal_salve", HerbalSalveItem::new)
             .properties(it -> it.stacksTo(1))
             .properties(it -> it.craftRemainder(Items.BOWL))
-            .transform(it -> it.tab(CreativeModeTabs.FOOD_AND_DRINKS, NirvanaItems.addSuspiciousStack(it)))
+            .transform(it -> it.tab(CreativeModeTabs.FOOD_AND_DRINKS, NirvanaItems.addSuspiciousStack(it, Services.CONFIG.common().herbalSalveFactor())))
             .register();
 
     public static final ItemEntry<? extends RecordItem> DISC_JAM = REGISTRATE
@@ -151,18 +152,30 @@ public class NirvanaItems {
     public static final ItemEntry<? extends Item> EMPTY_PIPE = REGISTRATE
             .item("old_pipe", Item::new)
             .properties(it -> it.stacksTo(1))
-            .properties(it -> it.rarity(Rarity.RARE))
+            .properties(it -> it.rarity(Rarity.UNCOMMON))
             .model(Services.DATAGEN::pipe)
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .register();
 
-    public static final ItemEntry<? extends Item> FILLED_PIPE = REGISTRATE
-            .item("suspicious_pipe", SuspiciousPipeItem::new)
-            .properties(it -> it.stacksTo(1))
-            .properties(it -> it.rarity(Rarity.RARE))
+    public static final ItemEntry<? extends Item> STUFFED_PIPE = REGISTRATE
+            .item("stuffed_pipe", FilledPipeItem::new)
+            .properties(it -> it.durability(Services.CONFIG.common().getPipeHits()))
+            .properties(it -> it.rarity(Rarity.UNCOMMON))
+            .properties(it -> it.craftRemainder(EMPTY_PIPE.asItem()))
             .model(Services.DATAGEN::pipe)
             .tag(NirvanaTags.SMOKING_ITEM)
-            .transform(it -> it.tab(CreativeModeTabs.TOOLS_AND_UTILITIES, NirvanaItems.addSuspiciousStack(it)))
+            .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .recipe(Services.DATAGEN::stuffedPipe)
+            .register();
+
+    public static final ItemEntry<? extends Item> SUSPICIOUS_PIPE = REGISTRATE
+            .item("suspicious_pipe", SuspiciousPipeItem::new)
+            .properties(it -> it.durability(Services.CONFIG.common().getPipeHits()))
+            .properties(it -> it.rarity(Rarity.UNCOMMON))
+            .properties(it -> it.craftRemainder(EMPTY_PIPE.asItem()))
+            .model((c, p) -> p.withExistingParent(c.getName(), p.itemTexture(STUFFED_PIPE)))
+            .tag(NirvanaTags.SMOKING_ITEM)
+            .transform(it -> it.tab(CreativeModeTabs.TOOLS_AND_UTILITIES, NirvanaItems.addSuspiciousStack(it, Services.CONFIG.common().suspiciousPipeFactor())))
             .register();
 
     public static void register() {

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "entries": [
-    "nirvana:sniffer_digging"
+    "nirvana:sniffer_digging",
+    "nirvana:pipe_mansion",
+    "nirvana:pipe_igloo"
   ]
 }
