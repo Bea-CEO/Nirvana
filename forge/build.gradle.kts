@@ -13,6 +13,8 @@ val flywheel_forge_version: String by extra
 val freecam_forge_version: String by extra
 val ponder_forge_version: String by extra
 val mixin_extras_version: String by extra
+val oreganized_version: String by extra
+val blueprint_version: String by extra
 
 forge {
     enableMixins()
@@ -49,6 +51,8 @@ dependencies {
         modRuntimeOnly("maven.modrinth:just-enough-effect-descriptions-jeed:${jeed_version}")
         modRuntimeOnly("maven.modrinth:farmers-delight:${fd_forge_version}")
         modRuntimeOnly("maven.modrinth:freecam:${freecam_forge_version}")
+        modRuntimeOnly("maven.modrinth:oreganized:${oreganized_version}")
+        modRuntimeOnly("maven.modrinth:blueprint:${blueprint_version}")
         modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_forge_version}")
     }
 }

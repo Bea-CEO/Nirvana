@@ -2,9 +2,9 @@ package galena.nirvana.fabric.datagen;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import galena.nirvana.NirvanaCommon;
-import galena.nirvana.index.NirvanaItems;
-import galena.nirvana.index.NirvanaEffects;
 import galena.nirvana.fabric.FabricEntrypoint;
+import galena.nirvana.index.NirvanaEffects;
+import galena.nirvana.index.NirvanaItems;
 import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -40,6 +40,16 @@ public class FabricDataGenerators implements DataGeneratorEntrypoint {
                 FabricEntrypoint.REGISTRATE.addRawLang(stack.getDescriptionId(), "Bong of " + RegistrateLangProvider.toEnglishName(id));
             }
         });
+
+        translatePotion("stunning", "Brain Damage");
+    }
+
+    private void translatePotion(String potion) {
+        translatePotion(potion, RegistrateLangProvider.toEnglishName(potion));
+    }
+
+    private void translatePotion(String potion, String translation) {
+        FabricEntrypoint.REGISTRATE.addRawLang("item.nirvana.potion_bong.effect." + potion, "Bong of " + translation);
     }
 
 }
