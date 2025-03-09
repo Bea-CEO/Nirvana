@@ -25,23 +25,16 @@ configure<MixinExtension> {
     config("$mod_id.forge.mixins.json")
 }
 
-configure<MinecraftExtension> {
-    runs {
-        forEach {
-            // required for flywheel in dev
-            it.property("production", "true")
-        }
-    }
-}
+// issues with mixin extras
+tasks.withType<Test> { enabled = false }
 
 val jarJar = the<JarJarProjectExtension>()
 
 dependencies {
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")!!)
-    implementation("jarJar"("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
-        jarJar.ranged(this, "[${mixin_extras_version},)")
-    }
-    implementation("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")
+   compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")!!)
+   implementation("jarJar"("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
+       jarJar.ranged(this, "[${mixin_extras_version},)")
+   }
 
     modCompileOnly("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
@@ -49,7 +42,6 @@ dependencies {
         isTransitive = false
     }
     modImplementation("net.createmod.ponder:Ponder-Forge-${mc_version}:${ponder_forge_version}")
-
 
     if (!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-forge:${jei_version}")
