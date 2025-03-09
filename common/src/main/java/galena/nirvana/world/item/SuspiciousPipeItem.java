@@ -1,5 +1,6 @@
 package galena.nirvana.world.item;
 
+import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.platform.Services;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -45,6 +46,9 @@ public class SuspiciousPipeItem extends SuspiciousStewItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         getEffects(stack).forEach(user::addEffect);
+
+        NirvanaParticles.spawnRing(level, user);
+
         return user instanceof Player player
                 ? SmokingItem.takeHit(player, stack)
                 : stack;

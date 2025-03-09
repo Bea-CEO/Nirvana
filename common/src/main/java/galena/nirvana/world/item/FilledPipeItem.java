@@ -1,6 +1,7 @@
 package galena.nirvana.world.item;
 
 import galena.nirvana.index.NirvanaEffects;
+import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.platform.Services;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -39,6 +40,8 @@ public class FilledPipeItem extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         var effect = new MobEffectInstance(NirvanaEffects.PEACE.get(), 160 * Services.CONFIG.common().suspiciousPipeFactor(), 0);
         user.addEffect(effect);
+
+        NirvanaParticles.spawnRing(level, user);
 
         return user instanceof Player player
                 ? SmokingItem.takeHit(player, stack)

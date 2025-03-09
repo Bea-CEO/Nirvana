@@ -5,6 +5,7 @@ import galena.nirvana.index.NirvanaBrewing;
 import galena.nirvana.index.NirvanaEffects;
 import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.index.NirvanaPaintings;
+import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.index.NirvanaRecipeTypes;
 import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.platform.Services;
@@ -19,6 +20,7 @@ public class NirvanaCommon {
         NirvanaItems.register();
         NirvanaRecipeTypes.register();
         NirvanaPaintings.register();
+        NirvanaParticles.register();
 
         Services.PLATFORM.getRegistrate().addRegisterCallback(Registries.POTION, NirvanaBrewing::register);
     }

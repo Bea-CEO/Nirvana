@@ -86,9 +86,11 @@ public abstract class SmokingItem extends Item {
     }
 
     public static ItemStack takeHit(Player player, ItemStack stack) {
-        if(player.getAbilities().instabuild) return stack;
-        var remainder = stack.getItem().getCraftingRemainingItem();
+        player.getCooldowns().addCooldown(stack.getItem(), 20);
 
+        if(player.getAbilities().instabuild) return stack;
+
+        var remainder = stack.getItem().getCraftingRemainingItem();
 
         if (stack.isDamageableItem()) {
             stack.setDamageValue(stack.getDamageValue() + 1);
@@ -123,7 +125,6 @@ public abstract class SmokingItem extends Item {
             CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
         }
 
-
         if (entity instanceof Player player) {
             player.awardStat(Stats.ITEM_USED.get(this));
             return takeHit(player, stack);
@@ -150,4 +151,5 @@ public abstract class SmokingItem extends Item {
     public boolean isEnchantable(ItemStack stack) {
         return false;
     }
+
 }

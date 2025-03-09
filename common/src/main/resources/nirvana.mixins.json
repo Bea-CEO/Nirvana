@@ -7,7 +7,7 @@
   "mixins": [
     "EntityMixin", "LivingEntityMixin", "MobMixin"
   ],
-  "client": ["ItemInHandRendererMixin", "PlayerItemInHandLayerMixin"],
+  "client": ["ItemInHandRendererMixin", "ParticleMixin", "PlayerItemInHandLayerMixin"],
   "injectors": {
     "defaultRequire": 1
   }
