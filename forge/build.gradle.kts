@@ -27,6 +27,7 @@ configure<MixinExtension> {
 
 // issues with mixin extras
 tasks.withType<Test> { enabled = false }
+tasks.compileTestJava { enabled = false }
 
 val jarJar = the<JarJarProjectExtension>()
 
