@@ -39,7 +39,7 @@ public class FilledPipeItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         var effect = new MobEffectInstance(NirvanaEffects.PEACE.get(), 160 * Services.CONFIG.common().suspiciousPipeFactor(), 0);
-        user.addEffect(effect);
+        SmokingItem.applyEffect(effect, stack, user, user);
 
         NirvanaParticles.spawnRing(level, user);
 

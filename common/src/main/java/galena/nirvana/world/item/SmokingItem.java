@@ -3,7 +3,6 @@ package galena.nirvana.world.item;
 import galena.nirvana.index.NirvanaEffects;
 import galena.nirvana.world.effects.IStackingEffect;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.gui.screens.social.PlayerEntry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
@@ -46,12 +45,12 @@ public abstract class SmokingItem extends Item {
         );
     }
 
-    private boolean isStackingEffect(MobEffect effect) {
+    private static boolean isStackingEffect(MobEffect effect) {
         var holder = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect);
         return holder.is(NirvanaEffects.STACKING_EFFECTS);
     }
 
-    private void applyEffect(MobEffectInstance instance, ItemStack source, LivingEntity target, LivingEntity cause) {
+    public static void applyEffect(MobEffectInstance instance, ItemStack source, LivingEntity target, @Nullable LivingEntity cause) {
         var existing = target.getEffect(instance.getEffect());
 
         if (existing != null && isStackingEffect(instance.getEffect())) {

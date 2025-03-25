@@ -45,7 +45,9 @@ public class SuspiciousPipeItem extends SuspiciousStewItem {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-        getEffects(stack).forEach(user::addEffect);
+        getEffects(stack).forEach(effect ->
+                SmokingItem.applyEffect(effect, stack, user, user)
+        );
 
         NirvanaParticles.spawnRing(level, user);
 
