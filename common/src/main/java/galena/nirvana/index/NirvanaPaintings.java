@@ -15,7 +15,7 @@ public class NirvanaPaintings {
             .generic("this_is_not_a_horn", Registries.PAINTING_VARIANT, () -> new PaintingVariant(48, 32))
             .setData(ProviderType.LANG, (context, provider) -> {
                 provider.add(context.getId().toLanguageKey("painting", "title"), "This is not a horn");
-                provider.add(context.getId().toLanguageKey("painting", "author"), "Yapetto");
+                provider.add(context.getId().toLanguageKey("painting", "author"), "Yapettoshen ");
             })
             .register();
 
