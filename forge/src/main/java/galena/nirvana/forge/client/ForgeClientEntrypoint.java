@@ -2,9 +2,9 @@ package galena.nirvana.forge.client;
 
 import galena.nirvana.client.JointModels;
 import galena.nirvana.index.NirvanaParticles;
+import galena.nirvana.world.entity.renderer.ReeferRenderer;
 import galena.nirvana.world.particle.SmokeRingParticle;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEngine;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -16,6 +16,7 @@ public class ForgeClientEntrypoint {
 
         modBus.addListener(ForgeClientEntrypoint::registerModels);
         modBus.addListener(ForgeClientEntrypoint::registerParticles);
+        modBus.addListener(ForgeClientEntrypoint::registerLayers);
     }
 
     private static void registerModels(ModelEvent.RegisterAdditional event) {
@@ -24,9 +25,11 @@ public class ForgeClientEntrypoint {
     }
 
     private static void registerParticles(RegisterParticleProvidersEvent event) {
-        ParticleEngine engine = Minecraft.getInstance().particleEngine;
+        event.registerSpriteSet(NirvanaParticles.SMOKE_RING.get(), SmokeRingParticle.Provider::new);
+    }
 
-        engine.register(NirvanaParticles.SMOKE_RING.get(), SmokeRingParticle.Provider::new);
+    private static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ReeferRenderer.LAYER, ReeferRenderer::createLayers);
     }
 
 }

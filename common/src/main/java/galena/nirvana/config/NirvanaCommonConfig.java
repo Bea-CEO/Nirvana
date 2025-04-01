@@ -19,7 +19,15 @@ public class NirvanaCommonConfig {
     }
 
     public int nauseaAfterHits() {
-        return 7;
+        return 3;
+    }
+
+    public int reeferAfterHits() {
+        return nauseaAfterHits();
+    }
+
+    public float reeferChance() {
+        return 0.5F;
     }
 
     public int jointPeaceSeconds() {
