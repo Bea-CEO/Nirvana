@@ -1,11 +1,16 @@
 package galena.nirvana.forge.services;
 
+import com.tterrag.registrate.builders.EntityBuilder;
+import com.tterrag.registrate.util.nullness.NonNullConsumer;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.forge.ForgeEntrypoint;
 import galena.nirvana.forge.world.ForgeJointItem;
+import galena.nirvana.platform.registrate.EntityPropertiesBuilder;
 import galena.nirvana.platform.registrate.NirvanaRegistrate;
 import galena.nirvana.platform.services.IPlatformHelper;
 import galena.nirvana.world.item.JointItem;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
@@ -28,4 +33,38 @@ public class ForgePlatformHelper implements IPlatformHelper {
         return new ForgeSpawnEggItem(type, primary, secodary, properties);
     }
 
+    private static <E extends Entity> NonNullConsumer<EntityType.Builder<E>> mapFactory(NonNullConsumer<EntityPropertiesBuilder> factory) {
+        return builder -> {
+            factory.accept(new EntityPropertiesBuilder() {
+                @Override
+                public EntityPropertiesBuilder sized(float width, float height) {
+                    builder.sized(width, height);
+                    return this;
+                }
+
+                @Override
+                public EntityPropertiesBuilder clientTrackingRange(int range) {
+                    builder.clientTrackingRange(range);
+                    return this;
+                }
+
+                @Override
+                public EntityPropertiesBuilder updateInterval(int interval) {
+                    builder.updateInterval(interval);
+                    return this;
+                }
+
+                @Override
+                public EntityPropertiesBuilder fireImmune() {
+                    builder.fireImmune();
+                    return this;
+                }
+            });
+        };
+    }
+
+    @Override
+    public <E extends Entity, P> NonNullFunction<EntityBuilder<E, P>, EntityBuilder<E, P>> entityProperties(NonNullConsumer<EntityPropertiesBuilder> factory) {
+        return entry -> entry.properties(mapFactory(factory));
+    }
 }

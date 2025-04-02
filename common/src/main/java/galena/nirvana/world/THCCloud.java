@@ -15,8 +15,8 @@ public class THCCloud {
 
         var cloud = new AreaEffectCloud(level, at.x, at.y, at.z);
 
-        cloud.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 0, 20 * nauseaSeconds));
-        cloud.addEffect(new MobEffectInstance(NirvanaEffects.PEACE.get(), 0, 20 * peaceSeconds));
+        cloud.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20 * nauseaSeconds));
+        cloud.addEffect(new MobEffectInstance(NirvanaEffects.PEACE.get(), 20 * peaceSeconds));
 
         cloud.setParticle(ParticleTypes.CLOUD);
         cloud.setRadius(1.5F * size);

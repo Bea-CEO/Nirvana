@@ -190,8 +190,11 @@ public class NirvanaItems {
 
     public static final ItemEntry<? extends Item> THC_MINECART = REGISTRATE
             .item("thc_minecart", it -> new CustomMinecartItem(it, NirvanaEntities.THC_MINECART))
-            .lang("THC Minecart")
+            .properties(it -> it.stacksTo(1))
+            .lang("Minecart with THC")
+            .recipe(Services.DATAGEN::thcMinecart)
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .onRegister(CustomMinecartItem::registerDispenseBehaviour)
             .register();
 
     public static void register() {

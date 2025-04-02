@@ -7,6 +7,7 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import galena.nirvana.platform.services.IDataGenHelper;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -74,6 +75,16 @@ public class ForgeDataGenHelper implements IDataGenHelper {
 
     @Override
     public void tnt(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public void thcMinecart(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public void thc(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider) {
         NOOP();
     }
 

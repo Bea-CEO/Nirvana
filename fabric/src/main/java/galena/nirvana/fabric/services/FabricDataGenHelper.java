@@ -6,6 +6,7 @@ import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import galena.nirvana.NirvanaConstants;
+import galena.nirvana.index.NirvanaBlocks;
 import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.index.NirvanaTags;
 import galena.nirvana.platform.services.IDataGenHelper;
@@ -15,10 +16,13 @@ import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -214,6 +218,29 @@ public class FabricDataGenHelper implements IDataGenHelper {
                 texture.apply("bottom"),
                 texture.apply("top"))
         );
+    }
+
+    @Override
+    public void thcMinecart(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, context.get())
+                .unlockedBy("has_thc", RegistrateRecipeProvider.has(NirvanaBlocks.THC))
+                .unlockedBy("has_minecart", RegistrateRecipeProvider.has(Items.MINECART))
+                .requires(NirvanaBlocks.THC)
+                .requires(Items.MINECART)
+                .save(provider);
+    }
+
+    @Override
+    public void thc(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, context.get())
+                .unlockedBy("has_weed", RegistrateRecipeProvider.has(NirvanaItems.WEED))
+                .unlockedBy("has_gunpowder", RegistrateRecipeProvider.has(Items.GUNPOWDER))
+                .pattern("XOX")
+                .pattern("OXO")
+                .pattern("XOX")
+                .define('O', NirvanaItems.WEED)
+                .define('X', Items.GUNPOWDER)
+                .save(provider);
     }
 
 }

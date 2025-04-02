@@ -6,6 +6,7 @@ import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -35,5 +36,9 @@ public interface IDataGenHelper {
     void tnt(RegistrateBlockLootTables provider, Block block);
 
     void tnt(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider);
+
+    void thcMinecart(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider);
+
+    void thc(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider);
 
 }

@@ -84,6 +84,7 @@ public class NirvanaBlocks {
             .loot(Services.DATAGEN::tnt)
             .item()
             .tab(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+            .recipe(Services.DATAGEN::thc)
             .build()
             .register();
 
