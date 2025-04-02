@@ -4,9 +4,7 @@
   "package": "galena.nirvana.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "${mod_id}.refmap.json",
-  "mixins": [
-    "EntityMixin", "LivingEntityMixin", "MobMixin"
-  ],
+  "mixins": ["CreeperMixin", "EntityMixin", "LivingEntityMixin", "MobMixin"],
   "client": ["ItemInHandRendererMixin", "ParticleMixin", "PlayerItemInHandLayerMixin"],
   "injectors": {
     "defaultRequire": 1

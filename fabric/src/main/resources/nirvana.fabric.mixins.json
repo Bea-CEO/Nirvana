@@ -6,7 +6,8 @@
   "refmap": "nirvana.refmap.json",
   "mixins": [
     "PotionBrewingMixin",
-    "PotionSlotMixin"
+    "PotionSlotMixin",
+    "TntBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

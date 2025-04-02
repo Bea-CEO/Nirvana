@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.block.CrateBlock;
 import galena.nirvana.world.block.HempCropBlock;
+import galena.nirvana.world.block.ThcBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
@@ -72,6 +73,17 @@ public class NirvanaBlocks {
             .item()
             .tab(CreativeModeTabs.NATURAL_BLOCKS)
             .model((c, p) -> p.blockSprite(c))
+            .build()
+            .register();
+
+    public static final BlockEntry<ThcBlock> THC = REGISTRATE
+            .block("thc", ThcBlock::new)
+            .lang("THC")
+            .initialProperties(() -> Blocks.TNT)
+            .blockstate(Services.DATAGEN::tnt)
+            .loot(Services.DATAGEN::tnt)
+            .item()
+            .tab(CreativeModeTabs.FUNCTIONAL_BLOCKS)
             .build()
             .register();
 

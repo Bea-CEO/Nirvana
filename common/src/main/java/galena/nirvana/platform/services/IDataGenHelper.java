@@ -31,4 +31,9 @@ public interface IDataGenHelper {
     void pipe(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider);
 
     void stuffedPipe(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider);
+
+    void tnt(RegistrateBlockLootTables provider, Block block);
+
+    void tnt(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider);
+
 }

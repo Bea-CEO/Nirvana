@@ -12,6 +12,7 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.NirvanaClient;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.item.BongItem;
+import galena.nirvana.world.item.CustomMinecartItem;
 import galena.nirvana.world.item.FilledPipeItem;
 import galena.nirvana.world.item.HerbalSalveItem;
 import galena.nirvana.world.item.JointItem;
@@ -19,6 +20,7 @@ import galena.nirvana.world.item.LazyFoodItem;
 import galena.nirvana.world.item.ModdedRecordItem;
 import galena.nirvana.world.item.PotionBongItem;
 import galena.nirvana.world.item.SuspiciousPipeItem;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -32,6 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 
@@ -176,6 +179,19 @@ public class NirvanaItems {
             .model((c, p) -> p.withExistingParent(c.getName(), p.itemTexture(STUFFED_PIPE)))
             .tag(NirvanaTags.SMOKING_ITEM)
             .transform(it -> it.tab(CreativeModeTabs.TOOLS_AND_UTILITIES, NirvanaItems.addSuspiciousStack(it, Services.CONFIG.common().suspiciousPipeFactor())))
+            .register();
+
+    public static final ItemEntry<? extends Item> REEFER_SPAWN_EGG = REGISTRATE
+            .item("reefer_spawn_egg", it -> Services.PLATFORM.createSpawnEggItem(NirvanaEntities.REEFER, 0x619932, 0x2f4f15, it))
+            .color(() -> () -> (ItemColor) (stack, i) -> ((SpawnEggItem) stack.getItem()).getColor(i))
+            .model((c, p) -> p.withExistingParent(c.getName(), "item/template_spawn_egg"))
+            .tab(CreativeModeTabs.SPAWN_EGGS)
+            .register();
+
+    public static final ItemEntry<? extends Item> THC_MINECART = REGISTRATE
+            .item("thc_minecart", it -> new CustomMinecartItem(it, NirvanaEntities.THC_MINECART))
+            .lang("THC Minecart")
+            .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .register();
 
     public static void register() {

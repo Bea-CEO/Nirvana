@@ -66,4 +66,15 @@ public class ForgeDataGenHelper implements IDataGenHelper {
     public void stuffedPipe(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider) {
         NOOP();
     }
+
+    @Override
+    public void tnt(RegistrateBlockLootTables provider, Block block) {
+        NOOP();
+    }
+
+    @Override
+    public void tnt(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
+        NOOP();
+    }
+
 }

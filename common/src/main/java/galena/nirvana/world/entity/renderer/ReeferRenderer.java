@@ -33,24 +33,25 @@ public class ReeferRenderer extends CreeperRenderer {
         var deformation = CubeDeformation.NONE;
 
         var mesh = new MeshDefinition();
-        PartDefinition partDefinition = mesh.getRoot();
-        partDefinition.addOrReplaceChild(
-                "head",
-                CubeListBuilder.create().texOffs(0, 32).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, deformation),
-                PartPose.offset(0.0F, 6.0F, 0.0F)
-        );
-        partDefinition.addOrReplaceChild(
-                "body",
-                CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, deformation),
+        PartDefinition root = mesh.getRoot();
+
+        root.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, deformation), PartPose.offset(2.0F, 18F, -4.0F));
+
+        root.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, deformation), PartPose.offset(-2.0F, 18F, -4.0F));
+
+        root.addOrReplaceChild("left_hind_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, deformation), PartPose.offset(2.0F, 18F, 4.0F));
+
+        root.addOrReplaceChild("right_hind_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, deformation), PartPose.offset(-2.0F, 18F, 4.0F));
+
+        root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, deformation), PartPose.offset(0.0F, 6.0F, 0.0F));
+
+        root.addOrReplaceChild("head", CubeListBuilder.create()
+                        .texOffs(0, 32).addBox(-10.0F, -16.0F, -4.5F, 20.0F, 23.0F, 0.0F, deformation)
+                        .texOffs(24, 62).addBox(-10.0F, -5.0F, -4.0F, 20.0F, 2.0F, 0.0F, deformation)
+                        .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, deformation),
                 PartPose.offset(0.0F, 6.0F, 0.0F)
         );
 
-        var legs = CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, deformation);
-        partDefinition.addOrReplaceChild("right_hind_leg", legs, PartPose.offset(-2.0F, 18.0F, 4.0F));
-        partDefinition.addOrReplaceChild("left_hind_leg", legs, PartPose.offset(2.0F, 18.0F, 4.0F));
-        partDefinition.addOrReplaceChild("right_front_leg", legs, PartPose.offset(-2.0F, 18.0F, -4.0F));
-        partDefinition.addOrReplaceChild("left_front_leg", legs, PartPose.offset(2.0F, 18.0F, -4.0F));
-
-        return LayerDefinition.create(mesh, 64, 32);
+        return LayerDefinition.create(mesh, 64, 64);
     }
 }

@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -35,6 +36,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+import java.util.function.Function;
 
 public class FabricDataGenHelper implements IDataGenHelper {
 
@@ -192,4 +195,25 @@ public class FabricDataGenHelper implements IDataGenHelper {
                 .unlockedBy("has_pipe", RegistrateRecipeProvider.has(NirvanaItems.EMPTY_PIPE))
                 .save(provider);
     }
+
+    @Override
+    public void tnt(RegistrateBlockLootTables provider, Block block) {
+        provider.add(block, LootTable.lootTable()
+                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
+                                StatePropertiesPredicate.Builder.properties().hasProperty(TntBlock.UNSTABLE, false)
+                        ))
+                )));
+    }
+
+    @Override
+    public void tnt(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
+        Function<String, ResourceLocation> texture = suffix -> provider.blockTexture(context.get()).withSuffix("_" + suffix);
+        provider.simpleBlock(context.get(), provider.models().cubeBottomTop(context.getName(),
+                texture.apply("side"),
+                texture.apply("bottom"),
+                texture.apply("top"))
+        );
+    }
+
 }
