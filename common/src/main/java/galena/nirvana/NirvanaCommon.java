@@ -18,11 +18,11 @@ public class NirvanaCommon {
         NirvanaSounds.register();
         NirvanaEffects.register();
         NirvanaBlocks.register();
+        NirvanaEntities.register();
         NirvanaItems.register();
         NirvanaRecipeTypes.register();
         NirvanaPaintings.register();
         NirvanaParticles.register();
-        NirvanaEntities.register();
 
         Services.PLATFORM.getRegistrate().addRegisterCallback(Registries.POTION, NirvanaBrewing::register);
     }

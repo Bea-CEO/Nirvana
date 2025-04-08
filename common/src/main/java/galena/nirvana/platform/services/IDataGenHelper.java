@@ -5,6 +5,8 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
+import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -40,5 +42,7 @@ public interface IDataGenHelper {
     void thcMinecart(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider);
 
     void thc(DataGenContext<Item, ? extends ItemLike> context, RegistrateRecipeProvider provider);
+
+    void reefer(RegistrateEntityLootTables provider, EntityType<?> type);
 
 }

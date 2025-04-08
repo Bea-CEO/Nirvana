@@ -5,6 +5,7 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
+import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaBlocks;
 import galena.nirvana.index.NirvanaItems;
@@ -13,12 +14,15 @@ import galena.nirvana.platform.services.IDataGenHelper;
 import galena.nirvana.world.block.HempCropBlock;
 import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
 import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -29,6 +33,7 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
@@ -38,6 +43,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -241,6 +247,19 @@ public class FabricDataGenHelper implements IDataGenHelper {
                 .define('O', NirvanaItems.WEED)
                 .define('X', Items.GUNPOWDER)
                 .save(provider);
+    }
+
+    @Override
+    public void reefer(RegistrateEntityLootTables provider, EntityType<?> type) {
+        provider.add(type, new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.KILLER,
+                                EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)
+                        ))
+                        .add(LootItem.lootTableItem(NirvanaItems.DISC_JAM))
+                )
+        );
     }
 
 }

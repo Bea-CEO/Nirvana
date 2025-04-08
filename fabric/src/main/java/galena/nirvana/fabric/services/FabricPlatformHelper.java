@@ -3,13 +3,18 @@ package galena.nirvana.fabric.services;
 import com.tterrag.registrate.builders.EntityBuilder;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.fabric.FabricEntrypoint;
+import galena.nirvana.fabric.world.item.FabricSpawnEggItem;
 import galena.nirvana.platform.registrate.EntityPropertiesBuilder;
 import galena.nirvana.platform.registrate.NirvanaRegistrate;
 import galena.nirvana.platform.services.IPlatformHelper;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
 
 public class FabricPlatformHelper implements IPlatformHelper {
 
@@ -53,4 +58,8 @@ public class FabricPlatformHelper implements IPlatformHelper {
         return entry -> entry.properties(mapFactory(factory));
     }
 
+    @Override
+    public Item createSpawnEggItem(NonNullSupplier<? extends EntityType<? extends Mob>> type, int primary, int secodary, Item.Properties properties) {
+        return new FabricSpawnEggItem(type, primary, secodary, properties);
+    }
 }

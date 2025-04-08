@@ -1,5 +1,6 @@
 package galena.nirvana.fabric;
 
+import com.tterrag.registrate.providers.ProviderType;
 import galena.nirvana.NirvanaCommon;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaBlocks;
@@ -12,6 +13,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -54,6 +56,10 @@ public class FabricEntrypoint implements ModInitializer {
         });
 
         BiomeModifications.addFeature(BiomeSelectors.tag(NirvanaTags.GENERATES_WILD_HEMP), GenerationStep.Decoration.VEGETAL_DECORATION, WILD_HEMP_FEATURE);
+
+        REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, provider ->
+                provider.addTag(NirvanaTags.CREEPER_LIKE).add(EntityType.CREEPER)
+        );
     }
 
 }

@@ -3,13 +3,16 @@ package galena.nirvana.world.effects;
 import galena.nirvana.index.NirvanaEntities;
 import galena.nirvana.index.NirvanaTags;
 import galena.nirvana.platform.Services;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -23,6 +26,7 @@ public class PeaceEffect extends MobEffect implements IStackingEffect {
     private static final int REEFER_MIN_RANGE = 8;
     private static final int REEFER_MAX_RANGE = 20;
     private static final int REEFER_CONVERSION_RANGE = 20;
+    private static final int REEFER_CONVERSION_RANGE_SQR = REEFER_CONVERSION_RANGE * REEFER_CONVERSION_RANGE;
 
     @Override
     public void onIncreasedTo(MobEffectInstance instance, ItemStack source, LivingEntity target, Level level) {
@@ -35,7 +39,27 @@ public class PeaceEffect extends MobEffect implements IStackingEffect {
 
         if (hitsTaken >= Services.CONFIG.common().reeferAfterHits()) {
             spawnReefers(target, level);
+            transformCreepers(target.position(), level);
         }
+    }
+
+    private static void transformCreepers(Vec3 around, Level level) {
+        var box = new AABB(BlockPos.containing(around)).inflate(REEFER_CONVERSION_RANGE + 1);
+        var targets = level.getEntitiesOfClass(Creeper.class, box, it ->
+                it.getType().is(NirvanaTags.CREEPER_LIKE) && it.distanceToSqr(around) <= REEFER_CONVERSION_RANGE_SQR
+        );
+
+        targets.forEach(it -> {
+            var replacement = NirvanaEntities.REEFER.create(level);
+            if (replacement == null) return;
+
+            replacement.setPos(it.position());
+            replacement.setYRot(it.getYRot());
+            replacement.setXRot(it.getXRot());
+
+            it.remove(Entity.RemovalReason.DISCARDED);
+            if (it.isRemoved()) level.addFreshEntity(replacement);
+        });
     }
 
     private static void spawnReefers(LivingEntity target, Level level) {

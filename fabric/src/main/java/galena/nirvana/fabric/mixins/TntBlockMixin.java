@@ -6,9 +6,11 @@ import galena.nirvana.world.block.ICustomTntBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,14 +30,47 @@ public class TntBlockMixin {
     }
 
     @WrapWithCondition(
-            method = "onPlace(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Z)V",
+            method = "onPlace",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/level/block/TntBlock;explode(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
             )
     )
-    public boolean createCustomPrimed(Level level, BlockPos pos, @Local(ordinal = 0, argsOnly = true) BlockState state) {
+    public boolean onPlace(Level level, BlockPos pos, @Local(ordinal = 0, argsOnly = true) BlockState state) {
         return onCaughtFire(state, level, pos, null, null);
+    }
+
+    @WrapWithCondition(
+            method = "neighborChanged",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/TntBlock;explode(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
+            )
+    )
+    public boolean neighborChanged(Level level, BlockPos pos, @Local(ordinal = 0, argsOnly = true) BlockState state) {
+        return onCaughtFire(state, level, pos, null, null);
+    }
+
+    @WrapWithCondition(
+            method = "playerWillDestroy",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/TntBlock;explode(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
+            )
+    )
+    public boolean playerWillDestroy(Level level, BlockPos pos, @Local(ordinal = 0, argsOnly = true) BlockState state, @Local(argsOnly = true) Player player) {
+        return onCaughtFire(state, level, pos, null, player);
+    }
+
+    @WrapWithCondition(
+            method = "use",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/TntBlock;explode(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/LivingEntity;)V"
+            )
+    )
+    public boolean use(Level level, BlockPos pos, LivingEntity igniter, @Local(ordinal = 0, argsOnly = true) BlockState state, @Local(argsOnly = true) BlockHitResult hit) {
+        return onCaughtFire(state, level, pos, hit.getDirection(), igniter);
     }
 
 }

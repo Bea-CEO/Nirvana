@@ -21,6 +21,11 @@ public class NirvanaEntities {
     public static final EntityEntry<? extends Mob> REEFER = REGISTRATE
             .entity("reefer", Reefer::new, MobCategory.MONSTER)
             .attributes(Reefer::createAttributes)
+            .transform(Services.PLATFORM.entityProperties(builder -> builder
+                    .sized(0.6F, 1.7F)
+                    .clientTrackingRange(8)
+            ))
+            .loot(Services.DATAGEN::reefer)
             .renderer(() -> ReeferRenderer::new)
             .register();
 
