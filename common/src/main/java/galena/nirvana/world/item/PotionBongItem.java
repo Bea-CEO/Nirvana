@@ -1,7 +1,9 @@
 package galena.nirvana.world.item;
 
+import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.platform.Services;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -49,4 +51,10 @@ public class PotionBongItem extends SmokingItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         PotionUtils.addPotionTooltip(stack, tooltip, 1.0F);
     }
+
+    @Override
+    protected @Nullable SoundEvent getUseSound() {
+        return NirvanaSounds.BONG.get();
+    }
+
 }

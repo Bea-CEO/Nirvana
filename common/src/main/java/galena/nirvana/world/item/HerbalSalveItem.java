@@ -1,5 +1,6 @@
 package galena.nirvana.world.item;
 
+import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.platform.Services;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,6 +29,10 @@ public class HerbalSalveItem extends SuspiciousStewItem {
 
         if (!effects.isEmpty()) {
             effects.forEach(target::addEffect);
+
+            player.playSound(NirvanaSounds.HERBAL_SALVE.get());
+
+            player.getCooldowns().addCooldown(stack.getItem(), 40);
 
             if (!(player.getAbilities().instabuild)) {
                 if (stack.getCount() > 1) {

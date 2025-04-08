@@ -1,12 +1,14 @@
 package galena.nirvana.world.item;
 
 import galena.nirvana.index.NirvanaEffects;
+import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.world.effects.IStackingEffect;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -84,13 +86,23 @@ public abstract class SmokingItem extends Item {
         ));
     }
 
+    protected @Nullable SoundEvent getUseSound() {
+        return NirvanaSounds.SMOKING.get();
+    }
+
     public static ItemStack takeHit(Player player, ItemStack stack) {
         player.getCooldowns().addCooldown(stack.getItem(), 20);
 
-        if(player.getAbilities().instabuild) return stack;
+        var sound = stack.getItem() instanceof SmokingItem item
+                ? item.getUseSound()
+                : NirvanaSounds.SMOKING.get();
+
+        if (sound != null) player.playSound(sound);
+
+
+        if (player.getAbilities().instabuild) return stack;
 
         var remainder = stack.getItem().getCraftingRemainingItem();
-
         if (stack.isDamageableItem()) {
             stack.setDamageValue(stack.getDamageValue() + 1);
             if (stack.getDamageValue() == stack.getMaxDamage()) {
