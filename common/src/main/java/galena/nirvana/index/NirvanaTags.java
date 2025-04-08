@@ -26,4 +26,6 @@ public class NirvanaTags {
 
     public static final TagKey<EntityType<?>> CREEPER_LIKE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(MOD_ID, "creeper_like"));
 
+    public static final TagKey<Block> SMOKING_CRATES = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "smoking_crates"));
+
 }
