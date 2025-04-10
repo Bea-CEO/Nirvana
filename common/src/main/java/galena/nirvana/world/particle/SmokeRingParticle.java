@@ -1,12 +1,12 @@
 package galena.nirvana.world.particle;
 
+import galena.nirvana.index.NirvanaParticles;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 
 public class SmokeRingParticle extends TextureSheetParticle implements ICollidingParticle {
@@ -31,7 +31,7 @@ public class SmokeRingParticle extends TextureSheetParticle implements ICollidin
     @Override
     public void collide() {
         remove();
-        level.addParticle(ParticleTypes.CLOUD, x, y, z, 0, 0, 0);
+        level.addParticle(NirvanaParticles.THC_SMOKE.get(), x, y, z, 0, 0, 0);
     }
 
     @Override

@@ -1,10 +1,10 @@
 package galena.nirvana.world.item;
 
 import galena.nirvana.index.NirvanaEffects;
+import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.world.effects.IStackingEffect;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,7 +39,7 @@ public abstract class SmokingItem extends Item {
 
     private void addParticles(ServerLevel level, LivingEntity entity) {
         var rot = entity.getLookAngle().scale(0.6);
-        level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,
+        level.sendParticles(NirvanaParticles.THC_SMOKE.get(),
                 entity.getX() + rot.x, entity.getEyeY() + rot.y, entity.getZ() + rot.z,
                 5,
                 0.0, 0.2 + entity.getRandom().nextDouble() * 0.1, 0.0,

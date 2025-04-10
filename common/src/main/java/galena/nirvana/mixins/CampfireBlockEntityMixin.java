@@ -2,8 +2,8 @@ package galena.nirvana.mixins;
 
 import galena.nirvana.index.NirvanaEffects;
 import galena.nirvana.index.NirvanaTags;
+import galena.nirvana.world.THCCloud;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,11 +32,7 @@ public class CampfireBlockEntityMixin {
         if (!level.getBlockState(pos.below()).is(NirvanaTags.SMOKING_CRATES)) return;
         if (level.getRandom().nextFloat() < 0.1F) return;
 
-        var x = pos.getX() + level.getRandom().nextInt(-RANGE, RANGE);
-        var y = pos.getY() + level.getRandom().nextInt(-RANGE, RANGE);
-        var z = pos.getZ() + level.getRandom().nextInt(-RANGE, RANGE);
-
-        level.addParticle(ParticleTypes.CLOUD, x, y, z, 0, 0, 0);
+        THCCloud.tickCloud(level, pos, RANGE);
 
         ci.cancel();
     }
