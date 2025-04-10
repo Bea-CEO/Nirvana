@@ -27,6 +27,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -195,6 +196,18 @@ public class NirvanaItems {
             .recipe(Services.DATAGEN::thcMinecart)
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .onRegister(CustomMinecartItem::registerDispenseBehaviour)
+            .register();
+
+    public static final ItemEntry<? extends Item> PEACE_BANNER_PATTERN = REGISTRATE
+            .item("peace_banner_pattern", it -> new BannerPatternItem(NirvanaTags.PEACE_BANNER_PATTERN, it))
+            .properties(it -> it.stacksTo(1))
+            .properties(it -> it.rarity(Rarity.UNCOMMON))
+            .setData(ProviderType.LANG, (context, provider) -> {
+                provider.add(context.get(), "Banner Pattern");
+                provider.addTooltip(context, "Peace Sign");
+            })
+            .recipe(Services.DATAGEN::peaceBannerPattern)
+            .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .register();
 
     public static void register() {

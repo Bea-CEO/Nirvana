@@ -262,4 +262,13 @@ public class FabricDataGenHelper implements IDataGenHelper {
         );
     }
 
+    @Override
+    public void peaceBannerPattern(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, context.get())
+                .requires(Items.PAPER)
+                .requires(NirvanaItems.HEMP)
+                .unlockedBy("has_hemp", RegistrateRecipeProvider.has(NirvanaItems.HEMP))
+                .save(provider);
+    }
+
 }

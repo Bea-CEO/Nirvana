@@ -95,4 +95,9 @@ public class ForgeDataGenHelper implements IDataGenHelper {
         NOOP();
     }
 
+    @Override
+    public void peaceBannerPattern(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider) {
+        NOOP();
+    }
+
 }

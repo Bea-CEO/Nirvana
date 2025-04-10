@@ -45,4 +45,6 @@ public interface IDataGenHelper {
 
     void reefer(RegistrateEntityLootTables provider, EntityType<?> type);
 
+    void peaceBannerPattern(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider);
+
 }

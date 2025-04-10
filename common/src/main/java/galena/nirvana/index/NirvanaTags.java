@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
 import static galena.nirvana.NirvanaConstants.MOD_ID;
 
@@ -27,5 +28,7 @@ public class NirvanaTags {
     public static final TagKey<EntityType<?>> CREEPER_LIKE = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(MOD_ID, "creeper_like"));
 
     public static final TagKey<Block> SMOKING_CRATES = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "smoking_crates"));
+
+    public static final TagKey<BannerPattern> PEACE_BANNER_PATTERN = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "peace_banner_patterns"));
 
 }
