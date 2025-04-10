@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.minecraft.client.particle.SuspendedTownParticle;
 
 public class FabricClientEntrypoint implements ClientModInitializer {
 
@@ -19,6 +20,7 @@ public class FabricClientEntrypoint implements ClientModInitializer {
         ModelLoadingPlugin.register(context -> context.addModels(JointModels.FLAT_MODEL, JointModels.HAND_MODEL));
 
         ParticleFactoryRegistry.getInstance().register(NirvanaParticles.SMOKE_RING.get(), SmokeRingParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(NirvanaParticles.HERBAL_SALVE.get(), SuspendedTownParticle.HappyVillagerProvider::new);
 
         EntityModelLayerRegistry.registerModelLayer(ReeferRenderer.LAYER, ReeferRenderer::createLayers);
     }

@@ -176,7 +176,7 @@ public class NirvanaItems {
             .properties(it -> it.durability(Services.CONFIG.common().getPipeHits()))
             .properties(it -> it.rarity(Rarity.UNCOMMON))
             .properties(it -> it.craftRemainder(EMPTY_PIPE.asItem()))
-            .model((c, p) -> p.withExistingParent(c.getName(), p.itemTexture(STUFFED_PIPE)))
+            .model(Services.DATAGEN::pipe)
             .tag(NirvanaTags.SMOKING_ITEM)
             .transform(it -> it.tab(CreativeModeTabs.TOOLS_AND_UTILITIES, NirvanaItems.addSuspiciousStack(it, Services.CONFIG.common().suspiciousPipeFactor())))
             .register();

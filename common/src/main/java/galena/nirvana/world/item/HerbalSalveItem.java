@@ -1,7 +1,9 @@
 package galena.nirvana.world.item;
 
+import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.platform.Services;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -25,29 +27,37 @@ public class HerbalSalveItem extends SuspiciousStewItem {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+        if (player.getCooldowns().isOnCooldown(stack.getItem())) return InteractionResult.PASS;
+
         var effects = getEffects(stack);
+        if (effects.isEmpty()) return InteractionResult.PASS;
 
-        if (!effects.isEmpty()) {
-            effects.forEach(target::addEffect);
+        effects.forEach(target::addEffect);
 
-            player.playSound(NirvanaSounds.HERBAL_SALVE.get());
+        player.playSound(NirvanaSounds.HERBAL_SALVE.get());
 
-            player.getCooldowns().addCooldown(stack.getItem(), 40);
+        player.getCooldowns().addCooldown(stack.getItem(), 40);
 
-            if (!(player.getAbilities().instabuild)) {
-                if (stack.getCount() > 1) {
-                    stack.shrink(1);
-                } else {
-                    var remainder = getCraftingRemainingItem();
-                    player.setItemInHand(hand, ItemStack.EMPTY);
-                    if (remainder != null) player.addItem(remainder.getDefaultInstance());
-                }
-            }
-
-            return InteractionResult.sidedSuccess(player.level().isClientSide);
+        if (player.level() instanceof ServerLevel level) {
+            var xOffset = target.getBbWidth() / 2;
+            var yOffset = target.getBbHeight() / 2;
+            level.sendParticles(NirvanaParticles.HERBAL_SALVE.get(),
+                    target.getX() + xOffset, target.getY() + yOffset, target.getZ() + xOffset,
+                    20, xOffset, yOffset, xOffset, 0.05
+            );
         }
 
-        return super.interactLivingEntity(stack, player, target, hand);
+        if (!(player.getAbilities().instabuild)) {
+            if (stack.getCount() > 1) {
+                stack.shrink(1);
+            } else {
+                var remainder = getCraftingRemainingItem();
+                player.setItemInHand(hand, ItemStack.EMPTY);
+                if (remainder != null) player.addItem(remainder.getDefaultInstance());
+            }
+        }
+
+        return InteractionResult.sidedSuccess(player.level().isClientSide);
     }
 
     @Override

@@ -21,6 +21,10 @@ public class NirvanaParticles {
             .generic("smoke_ring", Registries.PARTICLE_TYPE, ModdedParticleType::new)
             .register();
 
+    public static final RegistryEntry<ModdedParticleType> HERBAL_SALVE = REGISTRATE
+            .generic("herbal_salve", Registries.PARTICLE_TYPE, ModdedParticleType::new)
+            .register();
+
     public static final Supplier<ParticleOptions> THC_SMOKE = () -> ParticleTypes.CAMPFIRE_COSY_SMOKE;
 
     public static void spawnRing(Level level, LivingEntity user) {

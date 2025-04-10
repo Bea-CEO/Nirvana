@@ -4,6 +4,7 @@ import galena.nirvana.client.JointModels;
 import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.world.entity.renderer.ReeferRenderer;
 import galena.nirvana.world.particle.SmokeRingParticle;
+import net.minecraft.client.particle.SuspendedTownParticle;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -26,6 +27,7 @@ public class ForgeClientEntrypoint {
 
     private static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(NirvanaParticles.SMOKE_RING.get(), SmokeRingParticle.Provider::new);
+        event.registerSpriteSet(NirvanaParticles.HERBAL_SALVE.get(), SuspendedTownParticle.HappyVillagerProvider::new);
     }
 
     private static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
