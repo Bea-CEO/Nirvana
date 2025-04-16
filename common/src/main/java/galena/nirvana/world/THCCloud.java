@@ -29,9 +29,12 @@ public class THCCloud {
     }
 
     public static void tickCloud(Level level, BlockPos pos, int range) {
-        var x = pos.getX() + level.getRandom().nextFloat() * range * 2 - range;
-        var y = pos.getY() + level.getRandom().nextFloat() * range * 2 - range;
-        var z = pos.getZ() + level.getRandom().nextFloat() * range * 2 - range;
+        var x = pos.getX() + level.getRandom().nextFloat() * range * 2 - range + 0.5;
+        var y = pos.getY() + level.getRandom().nextFloat() * range * 2 - range + 0.5;
+        var z = pos.getZ() + level.getRandom().nextFloat() * range * 2 - range + 0.5;
+
+        var containing = BlockPos.containing(x, y, z);
+        if(level.getBlockState(containing).isSolid()) return;
 
         level.addParticle(NirvanaParticles.THC_SMOKE.get(), x, y, z, 0.01, 0.01, 0.01);
 

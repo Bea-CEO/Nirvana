@@ -1,14 +1,19 @@
 package galena.nirvana.forge.client;
 
+import galena.nirvana.NirvanaClient;
 import galena.nirvana.client.JointModels;
 import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.world.entity.renderer.ReeferRenderer;
-import galena.nirvana.world.particle.SmokeRingParticle;
-import net.minecraft.client.particle.SuspendedTownParticle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import java.util.function.Function;
 
 public class ForgeClientEntrypoint {
 
@@ -26,8 +31,12 @@ public class ForgeClientEntrypoint {
     }
 
     private static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(NirvanaParticles.SMOKE_RING.get(), SmokeRingParticle.Provider::new);
-        event.registerSpriteSet(NirvanaParticles.HERBAL_SALVE.get(), SuspendedTownParticle.HappyVillagerProvider::new);
+        NirvanaClient.registerParticles(new NirvanaParticles.ParticleRegister() {
+            @Override
+            public <T extends ParticleOptions> void register(ParticleType<T> options, Function<SpriteSet, ParticleProvider<T>> factory) {
+                event.registerSpriteSet(options, factory::apply);
+            }
+        });
     }
 
     private static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

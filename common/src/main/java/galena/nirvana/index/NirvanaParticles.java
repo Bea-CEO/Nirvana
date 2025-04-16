@@ -4,14 +4,16 @@ import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.particle.ModdedParticleType;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class NirvanaParticles {
 
@@ -25,10 +27,11 @@ public class NirvanaParticles {
             .generic("herbal_salve", Registries.PARTICLE_TYPE, ModdedParticleType::new)
             .register();
 
-    public static final Supplier<ParticleOptions> THC_SMOKE = () -> ParticleTypes.CAMPFIRE_COSY_SMOKE;
+    public static final RegistryEntry<ModdedParticleType> THC_SMOKE = REGISTRATE
+            .generic("thc_smoke", Registries.PARTICLE_TYPE, ModdedParticleType::new)
+            .register();
 
     public static void spawnRing(Level level, LivingEntity user) {
-        if(user.getRandom().nextInt(0, 3) != 0) return;
         if (level instanceof ServerLevel serverLevel) {
             var pos = user.getEyePosition();
             var motion = user.getLookAngle();
@@ -38,6 +41,11 @@ public class NirvanaParticles {
 
     public static void register() {
         // loads this class
+    }
+
+    @FunctionalInterface
+    public interface ParticleRegister {
+        <T extends ParticleOptions> void register(ParticleType<T> options, Function<SpriteSet, ParticleProvider<T>> factory);
     }
 
 }
