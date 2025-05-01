@@ -2,6 +2,7 @@ package galena.nirvana.index;
 
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import galena.nirvana.compat.DyeColors;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.block.CrateBlock;
 import galena.nirvana.world.block.HempCropBlock;
@@ -10,9 +11,18 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.GlazedTerracottaBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.material.MapColor;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class NirvanaBlocks {
 
@@ -89,6 +99,46 @@ public class NirvanaBlocks {
             .recipe(Services.DATAGEN::thc)
             .build()
             .register();
+
+    private static BlockEntry<GlazedTerracottaBlock> createHempBurlap(@Nullable DyeColor color) {
+        var name = "hemp_burlap";
+        return REGISTRATE
+                .block(color == null ? name : color + "_" + name, GlazedTerracottaBlock::new)
+                .initialProperties(() -> Blocks.HAY_BLOCK)
+                .properties(it -> color == null ? it.mapColor(MapColor.WOOL) : it.mapColor(color))
+                .blockstate(Services.DATAGEN::hempBurlap)
+                .tag(BlockTags.SWORD_EFFICIENT)
+                .item()
+                .tab(CreativeModeTabs.BUILDING_BLOCKS)
+                .recipe(Services.DATAGEN.hempBurlap(color))
+                .build()
+                .register();
+    }
+
+    public static final BlockEntry<GlazedTerracottaBlock> HEMP_BURLAP = createHempBurlap(null);
+    public static final Map<DyeColor, BlockEntry<GlazedTerracottaBlock>> COLORED_HEMP_BURLAP = colored(NirvanaBlocks::createHempBurlap);
+
+    private static BlockEntry<RotatedPillarBlock> createWovenBurlap(@Nullable DyeColor color) {
+        var name = "woven_burlap";
+        return REGISTRATE
+                .block(color == null ? name : color + "_" + name, RotatedPillarBlock::new)
+                .initialProperties(() -> Blocks.HAY_BLOCK)
+                .properties(it -> color == null ? it.mapColor(MapColor.WOOL) : it.mapColor(color))
+                .blockstate(Services.DATAGEN::wovenHempBurlap)
+                .tag(BlockTags.SWORD_EFFICIENT)
+                .item()
+                .tab(CreativeModeTabs.BUILDING_BLOCKS)
+                .recipe(Services.DATAGEN.wovenHempBurlap(color))
+                .build()
+                .register();
+    }
+
+    public static final BlockEntry<RotatedPillarBlock> WOVEN_BURLAP = createWovenBurlap(null);
+    public static final Map<DyeColor, BlockEntry<RotatedPillarBlock>> COLORED_WOVEN_BURLAP = colored(NirvanaBlocks::createWovenBurlap);
+
+    private static <T> Map<DyeColor, T> colored(Function<DyeColor, T> mapper) {
+        return DyeColors.supported().collect(Collectors.toMap(it -> it, mapper));
+    }
 
     public static void register() {
         // loads this class

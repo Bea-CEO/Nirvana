@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#forge:dyes/light_gray",
+      "required": false
+    }
+  ]
+}

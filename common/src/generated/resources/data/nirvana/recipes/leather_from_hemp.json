@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "misc",
   "key": {
-    "h": {
+    "X": {
       "item": "nirvana:hemp"
     }
   },
   "pattern": [
-    "hh",
-    "hh"
+    "XXX",
+    "XXX"
   ],
   "result": {
     "item": "minecraft:leather"

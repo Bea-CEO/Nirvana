@@ -6,12 +6,16 @@ import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import org.jetbrains.annotations.Nullable;
 
 public interface IDataGenHelper {
 
@@ -47,4 +51,11 @@ public interface IDataGenHelper {
 
     void peaceBannerPattern(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider);
 
+    void hempBurlap(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider);
+
+    <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> hempBurlap(@Nullable DyeColor color);
+
+    void wovenHempBurlap(DataGenContext<Block, ? extends RotatedPillarBlock> context, RegistrateBlockstateProvider provider);
+
+    <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> wovenHempBurlap(@Nullable DyeColor color);
 }

@@ -6,13 +6,17 @@ import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import galena.nirvana.platform.services.IDataGenHelper;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import org.jetbrains.annotations.Nullable;
 
 public class ForgeDataGenHelper implements IDataGenHelper {
 
@@ -97,6 +101,26 @@ public class ForgeDataGenHelper implements IDataGenHelper {
 
     @Override
     public void peaceBannerPattern(DataGenContext<Item, ? extends Item> context, RegistrateRecipeProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> hempBurlap(@Nullable DyeColor color) {
+        return (c, p) -> NOOP();
+    }
+
+    @Override
+    public void hempBurlap(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> wovenHempBurlap(@Nullable DyeColor color) {
+        return (c, p) -> NOOP();
+    }
+
+    @Override
+    public void wovenHempBurlap(DataGenContext<Block, ? extends RotatedPillarBlock> context, RegistrateBlockstateProvider provider) {
         NOOP();
     }
 

@@ -210,6 +210,12 @@ public class NirvanaItems {
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .register();
 
+    public static final ItemEntry<? extends Item> HEMP_CLOTH = REGISTRATE
+            .item("hemp_cloth", Item::new)
+            .recipe((c, p) -> p.square(DataIngredient.items(HEMP.get()), RecipeCategory.MISC, c, true))
+            .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .register();
+
     public static void register() {
         // loads this class
     }

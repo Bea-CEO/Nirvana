@@ -6,6 +6,9 @@ import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import com.tterrag.registrate.util.DataIngredient;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaBlocks;
 import galena.nirvana.index.NirvanaItems;
@@ -23,6 +26,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -31,6 +35,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -46,6 +51,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
@@ -271,4 +277,44 @@ public class FabricDataGenHelper implements IDataGenHelper {
                 .save(provider);
     }
 
+    public <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> color(DyeColor color, NonNullSupplier<? extends ItemLike> from) {
+        return (context, provider) -> {
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, context.get())
+                    .requires(from.get())
+                    .requires(color.getTag())
+                    .unlockedBy("has_uncolored", RegistrateRecipeProvider.has(from.get()))
+                    .save(provider, context.getId().withSuffix("_dyeing"));
+        };
+    }
+
+    @Override
+    public <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> hempBurlap(@Nullable DyeColor color) {
+        if (color != null) return color(color, NirvanaBlocks.HEMP_BURLAP);
+        return (context, provider) -> {
+            provider.square(DataIngredient.items(NirvanaItems.HEMP_CLOTH.get()), RecipeCategory.BUILDING_BLOCKS, context, true);
+        };
+    }
+
+    @Override
+    public void hempBurlap(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
+        var model = provider.models().withExistingParent(context.getName(), "block/template_glazed_terracotta")
+                .texture("pattern", provider.blockTexture(context.get()));
+
+        provider.horizontalBlock(context.get(), model);
+    }
+
+    @Override
+    public void wovenHempBurlap(DataGenContext<Block, ? extends RotatedPillarBlock> context, RegistrateBlockstateProvider provider) {
+        var texture = provider.blockTexture(context.get());
+        provider.axisBlock(context.get(), texture.withSuffix("_side"), texture.withSuffix("_top"));
+    }
+
+    @Override
+    public <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> wovenHempBurlap(@Nullable DyeColor color) {
+        return (context, provider) -> {
+            if(color != null) this.<T>color(color, NirvanaBlocks.WOVEN_BURLAP).accept(context, provider);
+            var from = color == null ? NirvanaBlocks.HEMP_BURLAP : NirvanaBlocks.COLORED_HEMP_BURLAP.get(color);
+            RegistrateRecipeProvider.polished(provider, RecipeCategory.BUILDING_BLOCKS, context.get(), from.get());
+        };
+    }
 }

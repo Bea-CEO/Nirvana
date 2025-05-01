@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "nirvana:hemp_burlap"
+    },
+    {
+      "tag": "c:cyan_dyes"
+    }
+  ],
+  "result": {
+    "item": "nirvana:cyan_hemp_burlap"
+  }
+}
