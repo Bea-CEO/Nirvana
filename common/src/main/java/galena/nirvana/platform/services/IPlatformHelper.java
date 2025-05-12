@@ -6,6 +6,7 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.platform.registrate.EntityPropertiesBuilder;
 import galena.nirvana.platform.registrate.NirvanaRegistrate;
+import galena.nirvana.world.item.DeerStalkerItem;
 import galena.nirvana.world.item.JointItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +20,10 @@ public interface IPlatformHelper {
 
     default JointItem createJointItem(Item.Properties properties) {
         return new JointItem(properties);
+    }
+
+    default DeerStalkerItem createDeerstalkerItem(Item.Properties properties) {
+        return new DeerStalkerItem(properties);
     }
 
     default Item createSpawnEggItem(NonNullSupplier<? extends EntityType<? extends Mob>> type, int primary, int secodary, Item.Properties properties) {

@@ -27,6 +27,8 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -124,7 +126,7 @@ public class NirvanaItems {
             .tag(NirvanaTags.SMOKING_ITEM)
             .tag(NirvanaTags.ATTACHED_TO_HEAD)
             .tab(CreativeModeTabs.FOOD_AND_DRINKS)
-            .model(Services.DATAGEN::joint)
+            .model(Services.DATAGEN::flatItem)
             .recipe((c, p) -> ShapelessRecipeBuilder
                     .shapeless(RecipeCategory.FOOD, c.get())
                     .requires(Items.PAPER)
@@ -213,6 +215,14 @@ public class NirvanaItems {
     public static final ItemEntry<? extends Item> HEMP_CLOTH = REGISTRATE
             .item("hemp_cloth", Item::new)
             .recipe((c, p) -> p.square(DataIngredient.items(HEMP.get()), RecipeCategory.MISC, c, true))
+            .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .register();
+
+    public static final ItemEntry<? extends Item> DEERSTALKER = REGISTRATE
+            .item("deerstalker", Services.PLATFORM::createDeerstalkerItem)
+            .properties(it -> it.defaultDurability(ArmorMaterials.LEATHER.getDurabilityForType(ArmorItem.Type.HELMET)))
+            .recipe(Services.DATAGEN::deerStalker)
+            .model(Services.DATAGEN::flatItem)
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
             .register();
 

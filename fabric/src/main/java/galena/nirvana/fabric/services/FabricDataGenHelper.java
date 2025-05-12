@@ -15,6 +15,7 @@ import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.index.NirvanaTags;
 import galena.nirvana.platform.services.IDataGenHelper;
 import galena.nirvana.world.block.HempCropBlock;
+import galena.nirvana.world.item.DeerStalkerItem;
 import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
 import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -148,7 +149,7 @@ public class FabricDataGenHelper implements IDataGenHelper {
     }
 
     @Override
-    public void joint(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider) {
+    public void flatItem(DataGenContext<Item, ? extends Item> context, RegistrateItemModelProvider provider) {
         provider.withExistingParent(context.getName() + "_flat", "item/generated").texture("layer0", provider.itemTexture(context));
         provider.getBuilder(context.getName()).parent(new ModelFile.UncheckedModelFile("builtin/entity"));
     }
@@ -317,4 +318,15 @@ public class FabricDataGenHelper implements IDataGenHelper {
             RegistrateRecipeProvider.polished(provider, RecipeCategory.BUILDING_BLOCKS, context.get(), from.get());
         };
     }
+
+    @Override
+    public void deerStalker(DataGenContext<Item, DeerStalkerItem> context, RegistrateRecipeProvider provider) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, context.get())
+                .pattern("XXX")
+                .pattern("X X")
+                .define('X', NirvanaItems.HEMP_CLOTH.get())
+                .unlockedBy("has_hemp_cloth", RegistrateRecipeProvider.has(NirvanaItems.HEMP_CLOTH))
+                .save(provider);
+    }
+
 }
