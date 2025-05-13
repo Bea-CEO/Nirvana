@@ -78,8 +78,8 @@ public class FabricEntrypoint implements ModInitializer {
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.LEATHER)
                     .pattern("XXX")
                     .pattern("XXX")
-                    .define('X', NirvanaItems.HEMP.get())
-                    .unlockedBy("has_hemp", RegistrateRecipeProvider.has(NirvanaItems.HEMP))
+                    .define('X', NirvanaItems.HEMP_CLOTH.get())
+                    .unlockedBy("has_hemp", RegistrateRecipeProvider.has(NirvanaItems.HEMP_CLOTH))
                     .save(provider, new ResourceLocation(NirvanaConstants.MOD_ID, "leather_from_hemp"));
         });
 

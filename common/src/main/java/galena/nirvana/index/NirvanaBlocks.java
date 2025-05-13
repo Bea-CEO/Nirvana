@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.GlazedTerracottaBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,6 +106,7 @@ public class NirvanaBlocks {
         return REGISTRATE
                 .block(color == null ? name : color + "_" + name, GlazedTerracottaBlock::new)
                 .initialProperties(() -> Blocks.HAY_BLOCK)
+                .properties(it -> it.sound(SoundType.WOOL))
                 .properties(it -> color == null ? it.mapColor(MapColor.WOOL) : it.mapColor(color))
                 .blockstate(Services.DATAGEN::hempBurlap)
                 .tag(BlockTags.SWORD_EFFICIENT)
@@ -123,6 +125,7 @@ public class NirvanaBlocks {
         return REGISTRATE
                 .block(color == null ? name : color + "_" + name, RotatedPillarBlock::new)
                 .initialProperties(() -> Blocks.HAY_BLOCK)
+                .properties(it -> it.sound(SoundType.WOOL))
                 .properties(it -> color == null ? it.mapColor(MapColor.WOOL) : it.mapColor(color))
                 .blockstate(Services.DATAGEN::wovenHempBurlap)
                 .tag(BlockTags.SWORD_EFFICIENT)
