@@ -1,6 +1,5 @@
 package galena.nirvana.client;
 
-import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import galena.nirvana.NirvanaConstants;
@@ -10,6 +9,7 @@ import galena.nirvana.platform.services.IClientPlatformHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -51,17 +51,16 @@ public class CustomItemModel {
         void render(ItemRenderer renderer, BakedModel model, VertexConsumer vertexConsumer);
     }
 
-    private ModelResourceLocation getModel(ItemDisplayContext mode) {
-        if (contexts.contains(mode)) return equippedModel;
-        return flatModel;
+    private boolean useCustomModel(ItemDisplayContext mode) {
+        return contexts.contains(mode);
     }
 
     public void render(ItemStack stack, ItemDisplayContext mode, PoseStack pose, MultiBufferSource vertexConsumers, Renderer r) {
         pose.pushPose();
 
-        Lighting.setupForFlatItems();
+        var customModel = useCustomModel(mode);
+        var texture = customModel ? equippedModel : flatModel;
 
-        var texture = getModel(mode);
         var renderer = Minecraft.getInstance().getItemRenderer();
         var model = renderer.getItemModelShaper().getModelManager().getModel(texture);
 
@@ -69,7 +68,10 @@ public class CustomItemModel {
         model.getTransforms().getTransform(mode).apply(false, pose);
         pose.translate(-0.5, -0.5, -0.5);
 
-        var renderType = ItemBlockRenderTypes.getRenderType(stack, false);
+        var renderType = customModel ?
+                ItemBlockRenderTypes.getRenderType(stack, false)
+                : RenderType.cutout();
+
         var vertex = ItemRenderer.getFoilBufferDirect(vertexConsumers, renderType, true, stack.hasFoil());
         r.render(renderer, model, vertex);
 

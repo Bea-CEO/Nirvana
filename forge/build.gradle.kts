@@ -1,4 +1,3 @@
-import net.minecraftforge.gradle.common.util.MinecraftExtension
 import net.minecraftforge.gradle.userdev.jarjar.JarJarProjectExtension
 import org.spongepowered.asm.gradle.plugins.MixinExtension
 
@@ -15,6 +14,7 @@ val ponder_forge_version: String by extra
 val mixin_extras_version: String by extra
 val oreganized_version: String by extra
 val blueprint_version: String by extra
+val data_trades_version: String by extra
 
 forge {
     enableMixins()
@@ -54,6 +54,7 @@ dependencies {
         modRuntimeOnly("maven.modrinth:oreganized:${oreganized_version}")
         modRuntimeOnly("maven.modrinth:blueprint:${blueprint_version}")
         modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_forge_version}")
+        modRuntimeOnly("maven.modrinth:data-trades:${data_trades_version}")
     }
 }
 

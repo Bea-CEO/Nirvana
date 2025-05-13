@@ -31,4 +31,6 @@ public class NirvanaTags {
 
     public static final TagKey<BannerPattern> PEACE_BANNER_PATTERN = TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(MOD_ID, "peace_banner_patterns"));
 
+    public static final TagKey<Item> BURLAP = TagKey.create(Registries.ITEM, new ResourceLocation(MOD_ID, "burlap"));
+
 }

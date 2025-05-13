@@ -3,19 +3,21 @@ package galena.nirvana.forge;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.NirvanaCommon;
 import galena.nirvana.NirvanaConstants;
+import galena.nirvana.NirvanaTrades;
 import galena.nirvana.forge.client.ForgeClientEntrypoint;
 import galena.nirvana.forge.world.AddItemLootModifier;
 import galena.nirvana.forge.world.ReplaceItemLootModifier;
 import galena.nirvana.index.NirvanaBrewing;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.function.Consumer;
+import java.util.ArrayList;
 
 @Mod(NirvanaConstants.MOD_ID)
 public class ForgeEntrypoint {
@@ -24,7 +26,9 @@ public class ForgeEntrypoint {
 
     public ForgeEntrypoint() {
         NirvanaCommon.init();
-        FMLJavaModLoadingContext.get().getModEventBus().<FMLCommonSetupEvent>addListener(event -> NirvanaBrewing.register());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        MinecraftForge.EVENT_BUS.addListener(this::registerTrades);
+
         //noinspection Convert2MethodRef
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ForgeClientEntrypoint.init());
 
@@ -37,6 +41,18 @@ public class ForgeEntrypoint {
                 .object("add_item")
                 .generic(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> AddItemLootModifier.CODEC)
                 .register();
+    }
+
+    private void setup(FMLCommonSetupEvent event) {
+        NirvanaBrewing.register();
+    }
+
+    private void registerTrades(VillagerTradesEvent event) {
+        NirvanaTrades.register((profession, level, listing) -> {
+            if (event.getType() != profession) return;
+            var trades = event.getTrades().computeIfAbsent(level, $ -> new ArrayList<>());
+            trades.add(listing);
+        });
     }
 
 }

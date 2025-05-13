@@ -1,6 +1,7 @@
 package galena.nirvana.index;
 
 import com.tterrag.registrate.AbstractRegistrate;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import galena.nirvana.compat.DyeColors;
 import galena.nirvana.platform.Services;
@@ -103,8 +104,10 @@ public class NirvanaBlocks {
 
     private static BlockEntry<GlazedTerracottaBlock> createHempBurlap(@Nullable DyeColor color) {
         var name = "hemp_burlap";
+        var translation = "Burlap";
         return REGISTRATE
                 .block(color == null ? name : color + "_" + name, GlazedTerracottaBlock::new)
+                .lang(color == null ? translation : RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " " + translation)
                 .initialProperties(() -> Blocks.HAY_BLOCK)
                 .properties(it -> it.sound(SoundType.WOOL))
                 .properties(it -> color == null ? it.mapColor(MapColor.WOOL) : it.mapColor(color))
@@ -113,6 +116,7 @@ public class NirvanaBlocks {
                 .item()
                 .tab(CreativeModeTabs.BUILDING_BLOCKS)
                 .recipe(Services.DATAGEN.hempBurlap(color))
+                .tag(NirvanaTags.BURLAP)
                 .build()
                 .register();
     }

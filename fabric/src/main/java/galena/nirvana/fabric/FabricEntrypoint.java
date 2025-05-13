@@ -5,13 +5,18 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import galena.nirvana.NirvanaCommon;
 import galena.nirvana.NirvanaConstants;
+import galena.nirvana.NirvanaTrades;
 import galena.nirvana.compat.DyeColors;
-import galena.nirvana.index.*;
-import galena.nirvana.platform.Services;
+import galena.nirvana.index.NirvanaBanners;
+import galena.nirvana.index.NirvanaBlocks;
+import galena.nirvana.index.NirvanaBrewing;
+import galena.nirvana.index.NirvanaItems;
+import galena.nirvana.index.NirvanaTags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -65,6 +70,10 @@ public class FabricEntrypoint implements ModInitializer {
         });
 
         BiomeModifications.addFeature(BiomeSelectors.tag(NirvanaTags.GENERATES_WILD_HEMP), GenerationStep.Decoration.VEGETAL_DECORATION, WILD_HEMP_FEATURE);
+
+        NirvanaTrades.register((profession, level, listing) ->
+                TradeOfferHelper.registerVillagerOffers(profession, level, list -> list.add(listing))
+        );
 
         REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, provider ->
                 provider.addTag(NirvanaTags.CREEPER_LIKE).add(EntityType.CREEPER)
