@@ -114,9 +114,7 @@ public abstract class SmokingItem extends Item {
 
         if (stack.isEmpty()) {
             if (remainder != null) {
-                var remainderStack = remainder.getDefaultInstance();
-                player.getInventory().add(remainderStack);
-                return remainderStack;
+                return remainder.getDefaultInstance();
             }
         }
 
