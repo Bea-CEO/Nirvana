@@ -2,6 +2,8 @@ package galena.nirvana.world.item;
 
 import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.platform.Services;
+import java.util.List;
+import java.util.stream.Stream;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,9 +13,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.stream.Stream;
 
 public class PotionBongItem extends SmokingItem {
 

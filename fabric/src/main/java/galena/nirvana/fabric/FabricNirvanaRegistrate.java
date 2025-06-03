@@ -6,7 +6,6 @@ import com.tterrag.registrate.providers.ProviderType;
 import galena.nirvana.platform.registrate.NirvanaRegistrate;
 import galena.nirvana.platform.registrate.SoundBuilder;
 import io.github.fabricators_of_create.porting_lib.data.SoundDefinition;
-
 import java.util.Optional;
 
 public class FabricNirvanaRegistrate extends NirvanaRegistrate<FabricNirvanaRegistrate> {

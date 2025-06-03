@@ -2,12 +2,11 @@ package galena.nirvana.compat;
 
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.world.item.SuspiciousItem;
+import java.util.StringJoiner;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
-
-import java.util.StringJoiner;
 
 public class NirvanaJeiCompat {
 

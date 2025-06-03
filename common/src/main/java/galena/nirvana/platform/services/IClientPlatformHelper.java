@@ -3,10 +3,9 @@ package galena.nirvana.platform.services;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import galena.nirvana.client.CustomItemModel;
+import java.util.Collection;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-
-import java.util.Collection;
 
 public interface IClientPlatformHelper {
 

@@ -8,6 +8,7 @@ import galena.nirvana.forge.client.ForgeClientEntrypoint;
 import galena.nirvana.forge.world.AddItemLootModifier;
 import galena.nirvana.forge.world.ReplaceItemLootModifier;
 import galena.nirvana.index.NirvanaBrewing;
+import java.util.ArrayList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -16,8 +17,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.ArrayList;
 
 @Mod(NirvanaConstants.MOD_ID)
 public class ForgeEntrypoint {

@@ -1,5 +1,5 @@
 plugins {
-    id("com.possible-triangle.gradle") version ("0.2.10")
+    id("com.possible-triangle.gradle") version ("0.2.11")
 }
 
 subprojects {

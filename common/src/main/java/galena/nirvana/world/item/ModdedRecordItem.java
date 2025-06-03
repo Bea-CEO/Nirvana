@@ -1,10 +1,9 @@
 package galena.nirvana.world.item;
 
+import java.util.function.Supplier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.RecordItem;
-
-import java.util.function.Supplier;
 
 public class ModdedRecordItem extends RecordItem {
 

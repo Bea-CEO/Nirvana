@@ -1,8 +1,7 @@
 package galena.nirvana.compat;
 
-import net.minecraft.world.item.DyeColor;
-
 import java.util.stream.Stream;
+import net.minecraft.world.item.DyeColor;
 
 public class DyeColors {
 

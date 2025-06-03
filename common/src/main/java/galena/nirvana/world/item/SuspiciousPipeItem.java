@@ -2,6 +2,7 @@ package galena.nirvana.world.item;
 
 import galena.nirvana.index.NirvanaParticles;
 import galena.nirvana.platform.Services;
+import java.util.List;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,8 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SuspiciousStewItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-
-import java.util.List;
 
 public class SuspiciousPipeItem extends SuspiciousStewItem {
 

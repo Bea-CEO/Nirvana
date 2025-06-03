@@ -4,7 +4,6 @@ import galena.nirvana.platform.services.IBrewingRegistry;
 import galena.nirvana.platform.services.IConfigs;
 import galena.nirvana.platform.services.IDataGenHelper;
 import galena.nirvana.platform.services.IPlatformHelper;
-
 import java.util.ServiceLoader;
 
 public class Services {

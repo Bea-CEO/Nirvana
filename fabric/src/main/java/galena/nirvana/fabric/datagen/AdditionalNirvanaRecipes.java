@@ -2,6 +2,7 @@ package galena.nirvana.fabric.datagen;
 
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaItems;
+import java.util.function.Consumer;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -9,8 +10,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-
-import java.util.function.Consumer;
 
 public class AdditionalNirvanaRecipes extends FabricRecipeProvider {
 

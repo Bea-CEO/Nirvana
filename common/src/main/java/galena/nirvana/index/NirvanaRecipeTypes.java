@@ -5,6 +5,9 @@ import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.recipe.SuspicousCraftingRecipe;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.NonNullList;
@@ -24,10 +27,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.FlowerBlock;
-
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 public class NirvanaRecipeTypes {
 

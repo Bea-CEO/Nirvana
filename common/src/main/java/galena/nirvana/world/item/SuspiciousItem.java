@@ -1,17 +1,16 @@
 package galena.nirvana.world.item;
 
+import static net.minecraft.world.item.SuspiciousStewItem.EFFECTS_TAG;
+import static net.minecraft.world.item.SuspiciousStewItem.EFFECT_DURATION_TAG;
+import static net.minecraft.world.item.SuspiciousStewItem.EFFECT_ID_TAG;
+
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
-
-import static net.minecraft.world.item.SuspiciousStewItem.EFFECTS_TAG;
-import static net.minecraft.world.item.SuspiciousStewItem.EFFECT_DURATION_TAG;
-import static net.minecraft.world.item.SuspiciousStewItem.EFFECT_ID_TAG;
 
 public class SuspiciousItem {
 

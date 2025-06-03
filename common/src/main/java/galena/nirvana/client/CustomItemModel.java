@@ -1,11 +1,17 @@
 package galena.nirvana.client;
 
+import static net.minecraft.world.item.ItemDisplayContext.HEAD;
+import static net.minecraft.world.item.ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
+import static net.minecraft.world.item.ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import galena.nirvana.NirvanaConstants;
 import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.platform.Services;
 import galena.nirvana.platform.services.IClientPlatformHelper;
+import java.util.Collection;
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,13 +22,6 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Collection;
-import java.util.List;
-
-import static net.minecraft.world.item.ItemDisplayContext.HEAD;
-import static net.minecraft.world.item.ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
-import static net.minecraft.world.item.ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
 
 public class CustomItemModel {
 

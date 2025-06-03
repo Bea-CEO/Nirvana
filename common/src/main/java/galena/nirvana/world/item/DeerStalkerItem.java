@@ -3,6 +3,7 @@ package galena.nirvana.world.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import galena.nirvana.index.NirvanaItems;
+import java.util.UUID;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -17,8 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-
-import java.util.UUID;
 
 public class DeerStalkerItem extends Item implements ArmorLike {
 
