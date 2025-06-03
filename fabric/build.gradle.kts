@@ -30,10 +30,5 @@ dependencies {
     }
 }
 
-sourceSets.main {
-    resources.srcDir(project(":common").file("src/main/resources"))
-    resources.srcDir(project(":common").file("src/generated/resources"))
-}
-
 uploadToCurseforge()
 uploadToModrinth()

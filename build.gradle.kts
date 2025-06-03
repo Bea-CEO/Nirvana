@@ -1,10 +1,9 @@
 plugins {
-    id("com.possible-triangle.gradle") version ("0.2.11")
+    id("com.possible-triangle.gradle") version ("0.2.12")
 }
 
 subprojects {
     repositories {
-        mavenLocal()
         modrinthMaven()
 
         maven {
@@ -45,8 +44,7 @@ subprojects {
             }
         }
 
-        maven {
-            url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
+        nexus {
             content {
                 includeGroup("dev.galena")
             }
@@ -55,6 +53,12 @@ subprojects {
 
     tasks.withType<Jar> {
         exclude("**/*.bbmodel")
+    }
+
+    enablePublishing {
+        repositories {
+            if (env.isCI) nexus()
+        }
     }
 }
 
