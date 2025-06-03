@@ -5,7 +5,7 @@ val mc_version: String by extra
 val registrate_fabric_version: String by extra
 val jei_version: String by extra
 val jeed_version: String by extra
-val mixin_extras_version: String by extra
+val galena_hats_version: String by extra
 
 fabric {
     enableMixins()
@@ -13,6 +13,7 @@ fabric {
 
     dependOn(project(":common"))
     includesMod("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
+    includesMod("dev.galena:hats-fabric:${galena_hats_version}")
 }
 
 configure<LoomGradleExtensionAPI> {
@@ -20,8 +21,6 @@ configure<LoomGradleExtensionAPI> {
 }
 
 dependencies {
-    "include"(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}")!!)!!)
-
     modCompileOnly("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${mc_version}-fabric-api:${jei_version}")
 

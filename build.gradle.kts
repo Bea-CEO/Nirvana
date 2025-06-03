@@ -4,8 +4,8 @@ plugins {
 
 subprojects {
     repositories {
+        mavenLocal()
         modrinthMaven()
-        curseMaven()
 
         maven {
             url = uri("https://mvn.devos.one/snapshots/")
@@ -14,7 +14,6 @@ subprojects {
                 includeGroup("io.github.fabricators_of_create.Porting-Lib")
             }
         }
-
 
         maven {
             url = uri("https://maven.tterrag.com/")
@@ -43,6 +42,13 @@ subprojects {
             url = uri("https://jitpack.io")
             content {
                 includeGroup("com.github.llamalad7.mixinextras")
+            }
+        }
+
+        maven {
+            url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
+            content {
+                includeGroup("dev.galena")
             }
         }
     }

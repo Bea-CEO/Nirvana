@@ -15,12 +15,14 @@ val mixin_extras_version: String by extra
 val oreganized_version: String by extra
 val blueprint_version: String by extra
 val data_trades_version: String by extra
+val galena_hats_version: String by extra
 
 forge {
     enableMixins()
 
     dependOn(project(":common"))
     includesMod("com.tterrag.registrate:Registrate:${registrate_forge_version}")
+    includesMod("dev.galena:hats-forge:${galena_hats_version}")
 }
 
 configure<MixinExtension> {
