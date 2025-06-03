@@ -13,7 +13,7 @@ fabric {
 
     dependOn(project(":common"))
     includesMod("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
-    includesMod("dev.galena:hats-fabric:${galena_hats_version}")
+    includesMod("dev.galena:hats-fabric:${mc_version}-${galena_hats_version}")
 }
 
 configure<LoomGradleExtensionAPI> {

@@ -22,7 +22,7 @@ forge {
 
     dependOn(project(":common"))
     includesMod("com.tterrag.registrate:Registrate:${registrate_forge_version}")
-    includesMod("dev.galena:hats-forge:${galena_hats_version}")
+    includesMod("dev.galena:hats-forge:${mc_version}-${galena_hats_version}")
 }
 
 configure<MixinExtension> {
