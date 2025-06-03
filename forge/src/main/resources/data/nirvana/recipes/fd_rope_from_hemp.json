@@ -7,7 +7,8 @@
     }
   },
   "pattern": [
-    "X", "X"
+    "X",
+    "X"
   ],
   "result": {
     "item": "farmersdelight:rope",
@@ -17,7 +18,8 @@
     {
       "modid": "farmersdelight",
       "type": "forge:mod_loaded"
-    }, {
+    },
+    {
       "type": "forge:not",
       "value": {
         "modid": "supplementaries",

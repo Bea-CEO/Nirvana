@@ -7,7 +7,8 @@
     }
   },
   "pattern": [
-    "X", "X"
+    "X",
+    "X"
   ],
   "result": {
     "item": "farmersdelight:rope",
@@ -19,7 +20,8 @@
       "values": [
         "farmersdelight"
       ]
-    }, {
+    },
+    {
       "condition": "fabric:not",
       "value": {
         "condition": "fabric:all_mods_loaded",

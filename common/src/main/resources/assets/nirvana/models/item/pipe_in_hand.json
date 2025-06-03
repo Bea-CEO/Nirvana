@@ -2,14 +2,38 @@
   "parent": "minecraft:item/generated",
   "display": {
     "thirdperson_righthand": {
-      "translation": [0, -2, -2],
-      "rotation": [0, -90, 0],
-      "scale": [0.7, 0.7, 0.7]
+      "translation": [
+        0,
+        -2,
+        -2
+      ],
+      "rotation": [
+        0,
+        -90,
+        0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
     },
     "thirdperson_lefthand": {
-      "translation": [0, -2, -1],
-      "rotation": [0, 0, 0],
-      "scale": [0.75, 0.75, 0.75]
+      "translation": [
+        0,
+        -2,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
     }
   }
 }

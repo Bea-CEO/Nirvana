@@ -4,7 +4,8 @@
     {
       "condition": "forge:loot_table_id",
       "loot_table_id": "minecraft:gameplay/sniffer_digging"
-    }, {
+    },
+    {
       "chance": 0.333,
       "condition": "minecraft:random_chance"
     }

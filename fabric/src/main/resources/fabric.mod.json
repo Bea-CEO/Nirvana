@@ -4,7 +4,9 @@
   "version": "${mod_version}",
   "name": "${mod_name}",
   "description": "TODO",
-  "authors": ["${mod_author}"],
+  "authors": [
+    "${mod_author}"
+  ],
   "contact": {
     "sources": "https://github.com/${repository}",
     "issues": "https://github.com/${repository}/issues"
@@ -13,12 +15,23 @@
   "environment": "*",
   "accessWidener": "nirvana.accesswidener",
   "entrypoints": {
-    "main": ["galena.nirvana.fabric.FabricEntrypoint"],
-    "client": ["galena.nirvana.fabric.client.FabricClientEntrypoint"],
-    "fabric-datagen": ["galena.nirvana.fabric.datagen.FabricDataGenerators"],
-    "jei_mod_plugin": ["galena.nirvana.fabric.compat.NirvanaJeiFabricPlugin"]
+    "main": [
+      "galena.nirvana.fabric.FabricEntrypoint"
+    ],
+    "client": [
+      "galena.nirvana.fabric.client.FabricClientEntrypoint"
+    ],
+    "fabric-datagen": [
+      "galena.nirvana.fabric.datagen.FabricDataGenerators"
+    ],
+    "jei_mod_plugin": [
+      "galena.nirvana.fabric.compat.NirvanaJeiFabricPlugin"
+    ]
   },
-  "mixins": ["${mod_id}.mixins.json", "${mod_id}.fabric.mixins.json"],
+  "mixins": [
+    "${mod_id}.mixins.json",
+    "${mod_id}.fabric.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.16",
     "fabric-api": "*",
