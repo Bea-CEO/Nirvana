@@ -1,15 +1,17 @@
-![Nirvana banner](https://i.imgur.com/62qPZDv.png)
+[LINE]: https://i.imgur.com/q7DEmD4.png
+
+![Nirvana banner](https://i.imgur.com/oEwbqQV.png)
 
 ## 📖 About:
 Nirvana is a mod that attempts to add weed as close to mojang's style as possible. Hemp can be found in Sparse Jungles or traded from the Wandering Trader. As you harvest it it can be made into Ropes, Hemp Cloth and Leads. If dried in a furnace it can be then used for Joints, Bongs and Pipes. Be careful during smoking though! New creeper variants - reefers might get you if you smoke too much. If you defeat them you can make THC.
 
-![Nirvana Line](https://i.imgur.com/A9n09c1.png)
+![][LINE]
 
 ## 📺 Showcases:
 
 ### [Adding Weed to Minecraft...](https://www.youtube.com/watch?v=mmt0cpZrVe0&t)
 
-![Nirvana Line](https://i.imgur.com/A9n09c1.png)
+![][LINE]
 
 ## 🎞️ Compatibility:
 
@@ -17,7 +19,7 @@ Nirvana is a mod that attempts to add weed as close to mojang's style as possibl
 
 Any mod adding flowers will allow you to use them in Herbal Salves and Pipes
 
-![Nirvana Line](https://i.imgur.com/A9n09c1.png)
+![][LINE]
 
 ## 👥 Where can you find us?:
 
