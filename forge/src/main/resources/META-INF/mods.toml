@@ -28,6 +28,6 @@ description = '''TODO'''
 [[dependencies.${mod_id}]]
     modId = "create"
     mandatory = false
-    versionRange = "[6.0.0,)"
+    versionRange = "*"
     ordering = "NONE"
     side = "BOTH"
