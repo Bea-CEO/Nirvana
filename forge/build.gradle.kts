@@ -53,7 +53,7 @@ dependencies {
         modRuntimeOnly("maven.modrinth:just-enough-effect-descriptions-jeed:${jeed_version}")
         modRuntimeOnly("maven.modrinth:farmers-delight:${fd_forge_version}")
         modRuntimeOnly("maven.modrinth:freecam:${freecam_forge_version}")
-        modRuntimeOnly("maven.modrinth:oreganized:${oreganized_version}")
+        modRuntimeOnly("dev.galena:oreganized:${oreganized_version}:slim")
         modRuntimeOnly("maven.modrinth:blueprint:${blueprint_version}")
         modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${mc_version}:${flywheel_forge_version}")
         modRuntimeOnly("maven.modrinth:data-trades:${data_trades_version}")
