@@ -33,6 +33,17 @@ configure<MixinExtension> {
 tasks.withType<Test> { enabled = false }
 tasks.compileTestJava { enabled = false }
 
+repositories {
+    maven {
+        url = uri("https://maven.createmod.net")
+        content {
+            includeGroup("com.simibubi.create")
+            includeGroup("net.createmod.ponder")
+            includeGroup("dev.engine-room.flywheel")
+        }
+    }
+}
+
 val jarJar = the<JarJarProjectExtension>()
 
 dependencies {

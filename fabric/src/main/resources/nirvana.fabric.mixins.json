@@ -4,11 +4,7 @@
   "package": "galena.nirvana.fabric.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "nirvana.refmap.json",
-  "mixins": [
-    "PotionBrewingMixin",
-    "PotionSlotMixin",
-    "TntBlockMixin"
-  ],
+  "mixins": ["ChickenMixin", "GenericItemFillingMixin", "PotionBrewingMixin", "PotionSlotMixin", "TntBlockMixin"],
   "injectors": {
     "defaultRequire": 1
   }

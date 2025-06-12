@@ -37,5 +37,8 @@
     "fabric-api": "*",
     "minecraft": ">=1.20.1",
     "java": ">=17"
+  },
+  "breaks": {
+    "create": "<0.5.1-f"
   }
 }

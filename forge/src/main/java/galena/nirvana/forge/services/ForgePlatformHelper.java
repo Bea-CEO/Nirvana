@@ -16,7 +16,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.common.crafting.PartialNBTIngredient;
+
+import java.util.Objects;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 
@@ -73,5 +78,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public <E extends Entity, P> NonNullFunction<EntityBuilder<E, P>, EntityBuilder<E, P>> entityProperties(NonNullConsumer<EntityPropertiesBuilder> factory) {
         return entry -> entry.properties(mapFactory(factory));
+    }
+
+    @Override
+    public Ingredient createNBTIngredient(ItemStack stack) {
+        var nbt = Objects.requireNonNull(stack.getTag());
+        return PartialNBTIngredient.of(stack.getItem(), nbt);
     }
 }

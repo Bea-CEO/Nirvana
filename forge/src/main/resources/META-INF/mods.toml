@@ -2,7 +2,8 @@ modLoader = "javafml"
 loaderVersion = "[47,)"
 license = 'https://github.com/${repository}/blob/1.20.x/LICENSE.txt'
 issueTrackerURL = "https://github.com/${repository}/issues"
-showAsResourcePack = false
+itemIcon="nirvana:hemp"
+configBackground="nirvana:textures/block/hemp_burlap.png"
 
 [[mods]]
 modId = "${mod_id}"
@@ -28,6 +29,6 @@ description = '''TODO'''
 [[dependencies.${mod_id}]]
     modId = "create"
     mandatory = false
-    versionRange = "*"
+    versionRange = "[0.5.1,)"
     ordering = "NONE"
     side = "BOTH"

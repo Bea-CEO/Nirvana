@@ -47,7 +47,7 @@ public class FabricEntrypoint implements ModInitializer {
     @Override
     public void onInitialize() {
         NirvanaCommon.init();
-        NirvanaBrewing.register();
+        REGISTRATE.addRegisterCallback(Registries.POTION, NirvanaBrewing::register);
         REGISTRATE.register();
 
         LootTableEvents.MODIFY.register((resources, manager, id, table, source) -> {

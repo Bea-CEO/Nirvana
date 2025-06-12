@@ -5,6 +5,7 @@ val mc_version: String by extra
 val registrate_fabric_version: String by extra
 val jei_version: String by extra
 val jeed_version: String by extra
+val create_fabric_version: String by extra
 val galena_hats_version: String by extra
 
 fabric {
@@ -20,9 +21,50 @@ configure<LoomGradleExtensionAPI> {
     accessWidenerPath.set(file("src/main/resources/$mod_id.accesswidener"))
 }
 
+repositories {
+    maven {
+        url = uri("https://mvn.devos.one/snapshots/")
+        content {
+            includeGroup("com.simibubi.create")
+            includeGroup("io.github.tropheusj")
+        }
+    }
+
+    maven {
+        url = uri("https://mvn.devos.one/releases/")
+        content {
+            includeGroup("io.github.fabricators_of_create.Porting-Lib")
+        }
+    }
+
+    maven {
+        url = uri("https://maven.tterrag.com/")
+        content {
+            includeGroup("com.jozufozu.flywheel")
+        }
+    }
+
+    maven {
+        url = uri("https://maven.jamieswhiteshirt.com/libs-release")
+        content {
+            includeGroup("com.jamieswhiteshirt")
+        }
+    }
+
+    maven {
+        url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
+        content {
+            includeGroup("net.minecraftforge")
+            includeGroup("fuzs.forgeconfigapiport")
+        }
+    }
+}
+
 dependencies {
     modCompileOnly("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${mc_version}-fabric-api:${jei_version}")
+
+    modImplementation("com.simibubi.create:create-fabric-${mc_version}:${create_fabric_version}")
 
     if(!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-fabric:${jei_version}")

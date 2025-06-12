@@ -20,7 +20,6 @@ import galena.nirvana.world.item.LazyFoodItem;
 import galena.nirvana.world.item.ModdedRecordItem;
 import galena.nirvana.world.item.PotionBongItem;
 import galena.nirvana.world.item.SuspiciousPipeItem;
-import java.util.function.Consumer;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -41,6 +40,9 @@ import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.ComposterBlock;
+
+import java.util.function.Consumer;
 
 public class NirvanaItems {
 
@@ -49,12 +51,16 @@ public class NirvanaItems {
     public static final ItemEntry<Item> HEMP = REGISTRATE
             .item("hemp", Item::new)
             .tab(CreativeModeTabs.INGREDIENTS)
+            .onRegister(it -> ComposterBlock.COMPOSTABLES.put(it, 0.65F))
             .register();
 
     public static final ItemEntry<ItemNameBlockItem> HEMP_SEEDS = REGISTRATE
             .item("hemp_seeds", p -> new ItemNameBlockItem(NirvanaBlocks.HEMP.get(), p))
+            .tag(NirvanaTags.SEEDS)
+            .tag(NirvanaTags.CHICKEN_FOOD)
             .tab(CreativeModeTabs.NATURAL_BLOCKS)
             .recipe((c, p) -> p.singleItem(DataIngredient.items(HEMP.get()), RecipeCategory.MISC, c, 1, 2))
+            .onRegister(it -> ComposterBlock.COMPOSTABLES.put(it, 0.3F))
             .register();
 
     public static final ItemEntry<Item> WEED = REGISTRATE

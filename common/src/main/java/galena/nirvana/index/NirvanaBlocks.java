@@ -8,9 +8,6 @@ import galena.nirvana.platform.Services;
 import galena.nirvana.world.block.CrateBlock;
 import galena.nirvana.world.block.HempCropBlock;
 import galena.nirvana.world.block.ThcBlock;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
@@ -18,12 +15,17 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.GlazedTerracottaBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class NirvanaBlocks {
 
@@ -73,6 +75,7 @@ public class NirvanaBlocks {
             .item()
             .tab(CreativeModeTabs.NATURAL_BLOCKS)
             .model((c, p) -> p.generated(c, p.modLoc("block/" + c.getName() + "_upper")))
+            .onRegister(it -> ComposterBlock.COMPOSTABLES.put(it, 0.85F))
             .build()
             .register();
 
@@ -86,6 +89,7 @@ public class NirvanaBlocks {
             .item()
             .tab(CreativeModeTabs.NATURAL_BLOCKS)
             .model((c, p) -> p.blockSprite(c))
+            .onRegister(it -> ComposterBlock.COMPOSTABLES.put(it, 0.65F))
             .build()
             .register();
 

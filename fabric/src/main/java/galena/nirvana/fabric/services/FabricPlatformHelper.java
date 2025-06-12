@@ -10,11 +10,16 @@ import galena.nirvana.platform.registrate.EntityPropertiesBuilder;
 import galena.nirvana.platform.registrate.NirvanaRegistrate;
 import galena.nirvana.platform.services.IPlatformHelper;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.impl.recipe.ingredient.builtin.NbtIngredient;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+
+import java.util.Objects;
 
 public class FabricPlatformHelper implements IPlatformHelper {
 
@@ -56,6 +61,13 @@ public class FabricPlatformHelper implements IPlatformHelper {
     @Override
     public <E extends Entity, P> NonNullFunction<EntityBuilder<E, P>, EntityBuilder<E, P>> entityProperties(NonNullConsumer<EntityPropertiesBuilder> factory) {
         return entry -> entry.properties(mapFactory(factory));
+    }
+
+    @Override
+    public Ingredient createNBTIngredient(ItemStack stack) {
+        var base = Ingredient.of(stack);
+        var nbt = Objects.requireNonNull(stack.getTag());
+        return new NbtIngredient(base, nbt, false).toVanilla();
     }
 
     @Override

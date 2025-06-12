@@ -22,15 +22,6 @@ subprojects {
         }
 
         maven {
-            url = uri("https://maven.createmod.net")
-            content {
-                includeGroup("com.simibubi.create")
-                includeGroup("net.createmod.ponder")
-                includeGroup("dev.engine-room.flywheel")
-            }
-        }
-
-        maven {
             url = uri("https://maven.blamejared.com/")
             content {
                 includeGroup("mezz.jei")

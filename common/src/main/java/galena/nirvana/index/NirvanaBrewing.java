@@ -18,16 +18,16 @@ public class NirvanaBrewing {
     }
 
     private static void registerMix(ItemStack ingredient, ItemStack from) {
-        var input = PotionUtils.getPotion(from) == Potions.WATER ? NirvanaItems.BONG.asStack() : from;
+        var input = PotionUtils.getPotion(from) == Potions.WATER ? Ingredient.of(NirvanaItems.BONG) : Services.PLATFORM.createNBTIngredient(from);
         var output = PotionBrewing.mix(ingredient, from);
         if (output == from) return;
-        Services.BREWING.addRecipe(Ingredient.of(input), Ingredient.of(ingredient), output);
+        Services.BREWING.addRecipe(input, Ingredient.of(ingredient), output);
     }
 
     private static void registerBongRecipes() {
         var waterBottle = withPotion(Items.POTION, Potions.WATER);
 
-        Services.BREWING.addRecipe(Ingredient.of(waterBottle), Ingredient.of(NirvanaItems.WEED), NirvanaItems.BONG.asStack());
+        Services.BREWING.addRecipe(Services.PLATFORM.createNBTIngredient(waterBottle), Ingredient.of(NirvanaItems.WEED), NirvanaItems.BONG.asStack());
 
         var catalysts = BuiltInRegistries.ITEM.stream()
                 .map(ItemStack::new)
