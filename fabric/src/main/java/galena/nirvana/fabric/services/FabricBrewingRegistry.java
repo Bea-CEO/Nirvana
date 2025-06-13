@@ -1,12 +1,11 @@
 package galena.nirvana.fabric.services;
 
 import galena.nirvana.platform.services.IBrewingRegistry;
+import java.util.ArrayList;
+import java.util.Optional;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.ArrayList;
-import java.util.Optional;
 
 public class FabricBrewingRegistry implements IBrewingRegistry {
 

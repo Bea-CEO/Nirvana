@@ -12,6 +12,7 @@ import galena.nirvana.platform.registrate.NirvanaRegistrate;
 import galena.nirvana.platform.services.IPlatformHelper;
 import galena.nirvana.world.item.DeerStalkerItem;
 import galena.nirvana.world.item.JointItem;
+import java.util.Objects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -20,8 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.crafting.PartialNBTIngredient;
-
-import java.util.Objects;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 
