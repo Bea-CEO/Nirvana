@@ -15,6 +15,7 @@ public class ForgeCommonConfig implements NirvanaCommonConfig {
     private final ForgeConfigSpec.IntValue browniesPeaceSeconds;
     private final ForgeConfigSpec.IntValue herbalSalveFactor;
     private final ForgeConfigSpec.IntValue suspiciousPipeFactor;
+    private final ForgeConfigSpec.BooleanValue allowFakePlayerSmoking;
 
     public ForgeCommonConfig(ForgeConfigSpec.Builder builder) {
         builder.push(NirvanaConstants.MOD_ID);
@@ -35,6 +36,8 @@ public class ForgeCommonConfig implements NirvanaCommonConfig {
         this.bongRadius = builder.defineInRange("radius", 15.0, 0.0, 32.0);
         this.bongPeaceSeconds = builder.defineInRange("peaceSeconds", 30, 1, 60 * 60);
         builder.pop();
+
+        this.allowFakePlayerSmoking = builder.define("allowFakePlayers",true);
 
         builder.pop();
 
@@ -96,4 +99,10 @@ public class ForgeCommonConfig implements NirvanaCommonConfig {
     public int suspiciousPipeFactor() {
         return suspiciousPipeFactor.get();
     }
+
+    @Override
+    public boolean allowFakePlayerSmoking() {
+        return allowFakePlayerSmoking.get();
+    }
+
 }

@@ -8,11 +8,11 @@ public interface NirvanaCommonConfig {
 
     default int getBongHits() {
         return 4;
-    };
+    }
 
     default int getJointHits() {
         return 3;
-    };
+    }
 
     int nauseaAfterHits();
 
@@ -32,5 +32,8 @@ public interface NirvanaCommonConfig {
 
     default int getPipeHits() {
         return 6;
-    };
+    }
+
+    boolean allowFakePlayerSmoking();
+
 }
