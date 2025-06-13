@@ -4,9 +4,7 @@
   "package": "galena.nirvana.forge.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "nirvana.refmap.json",
-  "mixins": [
-    "GenericItemFillingMixin"
-  ],
+  "mixins": [],
   "injectors": {
     "defaultRequire": 1
   }

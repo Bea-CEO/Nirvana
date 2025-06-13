@@ -38,4 +38,7 @@ public interface IPlatformHelper {
     Ingredient createNBTIngredient(ItemStack stack);
 
     boolean isFakePlayer(LivingEntity entity);
+
+    boolean createLoaded();
+
 }

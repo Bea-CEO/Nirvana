@@ -13,6 +13,7 @@ import java.util.Objects;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.impl.recipe.ingredient.builtin.NbtIngredient;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -74,6 +75,11 @@ public class FabricPlatformHelper implements IPlatformHelper {
     @Override
     public boolean isFakePlayer(LivingEntity entity) {
         return entity instanceof FakePlayer;
+    }
+
+    @Override
+    public boolean createLoaded() {
+        return FabricLoader.getInstance().isModLoaded("create");
     }
 
     @Override

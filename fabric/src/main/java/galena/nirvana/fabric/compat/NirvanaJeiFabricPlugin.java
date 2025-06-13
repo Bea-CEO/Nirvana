@@ -3,18 +3,18 @@ package galena.nirvana.fabric.compat;
 import galena.nirvana.compat.NirvanaJeiCompat;
 import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.index.NirvanaRecipeTypes;
+import galena.nirvana.platform.Services;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
 
 public class NirvanaJeiFabricPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        if (FabricLoader.getInstance().isModLoaded("create")) {
+        if (Services.PLATFORM.createLoaded()) {
             CreateCompat.addJeiRecipes(registration);
         }
 

@@ -16,6 +16,7 @@ dependencies {
    "mappings"(loom.officialMojangMappings())
 
     compileOnly("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")
+    compileOnly("org.ow2.asm:asm-tree:9.5")
 
     modCompileOnly("fuzs.forgeconfigapiport:forgeconfigapiport-common:${forge_config_port_version}")
 

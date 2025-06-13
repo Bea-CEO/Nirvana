@@ -91,4 +91,16 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public boolean isFakePlayer(LivingEntity entity) {
         return entity instanceof FakePlayer;
     }
+
+    @Override
+    public boolean createLoaded() {
+        var classLoader = getClass().getClassLoader();
+        try {
+            var buildInfo = classLoader.loadClass("com.simibubi.create.CreateBuildInfo");
+            var buildVersion = (String) buildInfo.getField("VERSION").get(null);
+            return buildVersion.startsWith("6.");
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+            return false;
+        }
+    }
 }
