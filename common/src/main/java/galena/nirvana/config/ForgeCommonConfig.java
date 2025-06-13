@@ -16,36 +16,64 @@ public class ForgeCommonConfig implements NirvanaCommonConfig {
     private final ForgeConfigSpec.IntValue herbalSalveFactor;
     private final ForgeConfigSpec.IntValue suspiciousPipeFactor;
     private final ForgeConfigSpec.BooleanValue allowFakePlayerSmoking;
+    private final ForgeConfigSpec.BooleanValue generateBongTranslations;
 
     public ForgeCommonConfig(ForgeConfigSpec.Builder builder) {
         builder.push(NirvanaConstants.MOD_ID);
 
         builder.push("smoking");
-        this.nauseaAfterHits = builder.defineInRange("nauseaAfterHits", 3, -1, 256);
-        this.reeferAfterHits = builder.defineInRange("reeferAfterHits", 3, -1, 256);
-        this.reeferChance = builder.defineInRange("reeferSpawnChance", 0.5F, 0F, 1F);
+        this.nauseaAfterHits = builder
+                .comment("number of uses after which smoking causes nausea")
+                .defineInRange("nauseaAfterHits", 3, -1, 256);
+        this.reeferAfterHits = builder
+                .comment("number of uses after which smoking causes reefers to spawn")
+                .defineInRange("reeferAfterHits", 3, -1, 256);
+        this.reeferChance = builder
+                .comment("chance of a reefer spawning")
+                .defineInRange("reeferSpawnChance", 0.5F, 0F, 1F);
 
         builder.comment("Joint");
         builder.push("joint");
-        this.jointRadius = builder.defineInRange("radius", 15.0, 0.0, 32.0);
-        this.jointPeaceSeconds = builder.defineInRange("peaceSeconds", 20, 1, 60 * 60);
+        this.jointRadius = builder
+                .comment("radius around the user within entities will also get the peace effect")
+                .defineInRange("radius", 15.0, 0.0, 32.0);
+        this.jointPeaceSeconds = builder
+                .comment("number of seconds the peace effect from a joint lasts")
+                .defineInRange("peaceSeconds", 20, 1, 60 * 60);
         builder.pop();
 
         builder.comment("Bong");
         builder.push("bong");
-        this.bongRadius = builder.defineInRange("radius", 15.0, 0.0, 32.0);
-        this.bongPeaceSeconds = builder.defineInRange("peaceSeconds", 30, 1, 60 * 60);
+        this.bongRadius = builder
+                .comment("radius around the user within entities will also get the effect from a bong")
+                .defineInRange("radius", 15.0, 0.0, 32.0);
+        this.bongPeaceSeconds = builder
+                .comment("number of seconds the peace effect from a normal bong lasts")
+                .defineInRange("peaceSeconds", 30, 1, 60 * 60);
+        this.generateBongTranslations = builder
+                .comment(
+                        "(ADVANCED) when on, translations for potion bongs are dynamically generated, allowing support for modded potions.",
+                        "If disabled, falls back to the default translations as provided in the language file (for example en_us.json)."
+                ).define("generateTranslations", true);
         builder.pop();
 
-        this.allowFakePlayerSmoking = builder.define("allowFakePlayers",true);
+        this.allowFakePlayerSmoking = builder
+                .comment("whether fake players like dispensers or create's deployers are allowed to smoke joint & co.")
+                .define("allowFakePlayers", true);
 
         builder.pop();
 
-        this.browniesPeaceSeconds = builder.defineInRange("brownies.peaceSeconds", 40, 1, 60 * 60);
+        this.browniesPeaceSeconds = builder
+                .comment("number of seconds the peace effect from a brownie lasts")
+                .defineInRange("brownies.peaceSeconds", 40, 1, 60 * 60);
 
-        this.herbalSalveFactor = builder.defineInRange("herbal_salve.factor", 3, 1, 10);
+        this.herbalSalveFactor = builder
+                .comment("how much longer herbal salve effects last in comparison to the suspicious soup equivalent (3 => 3x times)")
+                .defineInRange("herbal_salve.factor", 3, 1, 10);
 
-        this.suspiciousPipeFactor = builder.defineInRange("suspicious_pipe.factor", 4, 1, 10);
+        this.suspiciousPipeFactor = builder
+                .comment("how much longer suspicious pipe effects last in comparison to the suspicious soup equivalent (4 => 4x times)")
+                .defineInRange("suspicious_pipe.factor", 4, 1, 10);
 
         builder.pop();
     }
@@ -105,4 +133,8 @@ public class ForgeCommonConfig implements NirvanaCommonConfig {
         return allowFakePlayerSmoking.get();
     }
 
+    @Override
+    public boolean generateBongTranslations() {
+        return generateBongTranslations.get();
+    }
 }

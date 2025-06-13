@@ -14,6 +14,7 @@ import galena.nirvana.index.NirvanaBlocks;
 import galena.nirvana.index.NirvanaBrewing;
 import galena.nirvana.index.NirvanaItems;
 import galena.nirvana.index.NirvanaTags;
+import galena.nirvana.world.item.PotionBongItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -109,6 +110,8 @@ public class FabricEntrypoint implements ModInitializer {
                     provider.addTag(color.getTag()).addOptionalTag(forgeTag);
                 })
         );
+
+        REGISTRATE.addRawLang(PotionBongItem.PATTERN_TRANSLATION_KEY, "^Potion of (.+)$");
     }
 
 }

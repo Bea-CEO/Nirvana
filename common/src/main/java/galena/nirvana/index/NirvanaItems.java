@@ -116,6 +116,7 @@ public class NirvanaItems {
 
     public static final ItemEntry<PotionBongItem> POTION_BONG = REGISTRATE
             .item("potion_bong", PotionBongItem::new)
+            .lang("Bong of %s")
             .transform(it -> it.tab(CreativeModeTabs.FOOD_AND_DRINKS, NirvanaItems.addPotionStacks(it)))
             .color(() -> () -> NirvanaClient.POTION_COLOR)
             .properties(it -> it.durability(Services.CONFIG.common().getBongHits()))

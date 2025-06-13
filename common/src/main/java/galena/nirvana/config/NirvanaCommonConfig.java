@@ -36,4 +36,6 @@ public interface NirvanaCommonConfig {
 
     boolean allowFakePlayerSmoking();
 
+    boolean generateBongTranslations();
+
 }
