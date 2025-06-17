@@ -1,6 +1,5 @@
 val mc_version: String by extra
 val registrate_fabric_version: String by extra
-val mixin_extras_version: String by extra
 val forge_config_port_version: String by extra
 
 plugins {
@@ -15,7 +14,6 @@ dependencies {
    "minecraft"("com.mojang:minecraft:${mc_version}")
    "mappings"(loom.officialMojangMappings())
 
-    compileOnly("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")
     compileOnly("org.ow2.asm:asm-tree:9.5")
 
     modCompileOnly("fuzs.forgeconfigapiport:forgeconfigapiport-common:${forge_config_port_version}")

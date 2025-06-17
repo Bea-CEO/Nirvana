@@ -11,7 +11,6 @@ val create_forge_version: String by extra
 val flywheel_forge_version: String by extra
 val freecam_forge_version: String by extra
 val ponder_forge_version: String by extra
-val mixin_extras_version: String by extra
 val oreganized_version: String by extra
 val blueprint_version: String by extra
 val data_trades_version: String by extra
@@ -44,14 +43,7 @@ repositories {
     }
 }
 
-val jarJar = the<JarJarProjectExtension>()
-
 dependencies {
-   compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")!!)
-   implementation("jarJar"("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
-       jarJar.ranged(this, "[${mixin_extras_version},)")
-   }
-
     modCompileOnly("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     modImplementation("com.simibubi.create:create-${mc_version}:${create_forge_version}:slim") {
