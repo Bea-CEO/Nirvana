@@ -18,7 +18,6 @@ import galena.nirvana.world.block.HempCropBlock;
 import galena.nirvana.world.item.DeerStalkerItem;
 import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
 import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
-import java.util.function.Function;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -36,6 +35,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.TntBlock;
@@ -54,6 +54,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Function;
 
 public class FabricDataGenHelper implements IDataGenHelper {
 
@@ -312,7 +314,7 @@ public class FabricDataGenHelper implements IDataGenHelper {
     @Override
     public <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateRecipeProvider> wovenHempBurlap(@Nullable DyeColor color) {
         return (context, provider) -> {
-            if(color != null) this.<T>color(color, NirvanaBlocks.WOVEN_BURLAP).accept(context, provider);
+            if (color != null) this.<T>color(color, NirvanaBlocks.WOVEN_BURLAP).accept(context, provider);
             var from = color == null ? NirvanaBlocks.HEMP_BURLAP : NirvanaBlocks.COLORED_HEMP_BURLAP.get(color);
             RegistrateRecipeProvider.polished(provider, RecipeCategory.BUILDING_BLOCKS, context.get(), from.get());
         };
@@ -326,6 +328,24 @@ public class FabricDataGenHelper implements IDataGenHelper {
                 .define('X', NirvanaItems.HEMP_CLOTH.get())
                 .unlockedBy("has_hemp_cloth", RegistrateRecipeProvider.has(NirvanaItems.HEMP_CLOTH))
                 .save(provider);
+    }
+
+    @Override
+    public void pottedPlant(DataGenContext<Block, ? extends FlowerPotBlock> context, RegistrateBlockstateProvider provider) {
+        var model = provider.models().withExistingParent(context.getName(), "block/flower_pot_cross")
+                .texture("plant", provider.blockTexture(context.get().getContent()));
+        provider.simpleBlock(context.get(), model);
+    }
+
+    @Override
+    public void pottedPlant(RegistrateBlockLootTables provider, Block block) {
+        provider.dropPottedContents(block);
+    }
+
+    @Override
+    public void skull(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
+        var model = provider.models().getExistingFile(new ResourceLocation("block/skull"));
+        provider.simpleBlock(context.get(), model);
     }
 
 }

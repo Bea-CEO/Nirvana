@@ -20,9 +20,8 @@ import galena.nirvana.world.item.LazyFoodItem;
 import galena.nirvana.world.item.ModdedRecordItem;
 import galena.nirvana.world.item.PotionBongItem;
 import galena.nirvana.world.item.SuspiciousPipeItem;
-import java.util.function.Consumer;
-import java.util.function.IntSupplier;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -40,9 +39,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.ComposterBlock;
+
+import java.util.function.Consumer;
+import java.util.function.IntSupplier;
 
 public class NirvanaItems {
 
@@ -230,6 +233,15 @@ public class NirvanaItems {
             .recipe(Services.DATAGEN::deerStalker)
             .model(Services.DATAGEN::flatItem)
             .tab(CreativeModeTabs.TOOLS_AND_UTILITIES)
+            .register();
+
+    public static final ItemEntry<? extends Item> REEFER_HEAD = REGISTRATE
+            .item("reefer_head", it -> new StandingAndWallBlockItem(NirvanaBlocks.REEFER_HEAD.get(), NirvanaBlocks.REEFER_WALL_HEAD.get(), it, Direction.DOWN))
+            .properties(it -> it.rarity(Rarity.UNCOMMON))
+            .properties(it -> it.defaultDurability(ArmorMaterials.LEATHER.getDurabilityForType(ArmorItem.Type.HELMET)))
+            .model((c, p) -> p.withExistingParent(c.getName(), "item/template_skull"))
+            .tab(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+            .tag(NirvanaTags.HEADS)
             .register();
 
     public static void register() {

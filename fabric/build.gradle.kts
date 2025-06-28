@@ -16,6 +16,7 @@ fabric {
     dependOn(project(":common"))
     includesMod("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
     includesMod("dev.galena:hats-fabric:${mc_version}-${galena_hats_version}")
+    includesMod("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${forge_config_port_version}")
 }
 
 configure<LoomGradleExtensionAPI> {
@@ -39,13 +40,6 @@ repositories {
     }
 
     maven {
-        url = uri("https://maven.tterrag.com/")
-        content {
-            includeGroup("com.jozufozu.flywheel")
-        }
-    }
-
-    maven {
         url = uri("https://maven.jamieswhiteshirt.com/libs-release")
         content {
             includeGroup("com.jamieswhiteshirt")
@@ -57,9 +51,9 @@ dependencies {
     modCompileOnly("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${mc_version}-fabric-api:${jei_version}")
 
-    modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${forge_config_port_version}")
-
-    modImplementation("com.simibubi.create:create-fabric-${mc_version}:${create_fabric_version}")
+    modCompileOnly("com.simibubi.create:create-fabric-${mc_version}:${create_fabric_version}") {
+        exclude("com.jozufozu.flywheel")
+    }
 
     if(!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-fabric:${jei_version}")

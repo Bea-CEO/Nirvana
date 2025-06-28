@@ -15,6 +15,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,4 +63,9 @@ public interface IDataGenHelper {
 
     void deerStalker(DataGenContext<Item, DeerStalkerItem> context, RegistrateRecipeProvider provider);
 
+    void pottedPlant(DataGenContext<Block, ? extends FlowerPotBlock> context, RegistrateBlockstateProvider provider);
+
+    void pottedPlant(RegistrateBlockLootTables provider, Block block);
+
+    void skull(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider);
 }

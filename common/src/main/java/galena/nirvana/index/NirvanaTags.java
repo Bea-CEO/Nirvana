@@ -38,6 +38,8 @@ public class NirvanaTags {
 
     public static final TagKey<Item>[] SEEDS = platformSpecific(Registries.ITEM, "seeds");
 
+    public static final TagKey<Item>[] HEADS = platformSpecific(Registries.ITEM, "heads");
+
     @SuppressWarnings("unchecked")
     private static <T> TagKey<T>[] platformSpecific(ResourceKey<Registry<T>> registry, String path) {
         return (TagKey<T>[]) new TagKey[]{

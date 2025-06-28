@@ -16,6 +16,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import org.jetbrains.annotations.Nullable;
 
@@ -122,6 +123,21 @@ public class ForgeDataGenHelper implements IDataGenHelper {
 
     @Override
     public void deerStalker(DataGenContext<Item, DeerStalkerItem> context, RegistrateRecipeProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public void pottedPlant(DataGenContext<Block, ? extends FlowerPotBlock> context, RegistrateBlockstateProvider provider) {
+        NOOP();
+    }
+
+    @Override
+    public void pottedPlant(RegistrateBlockLootTables provider, Block block) {
+        NOOP();
+    }
+
+    @Override
+    public void skull(DataGenContext<Block, ? extends Block> context, RegistrateBlockstateProvider provider) {
         NOOP();
     }
 

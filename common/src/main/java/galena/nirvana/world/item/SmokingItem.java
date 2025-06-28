@@ -4,7 +4,6 @@ import galena.nirvana.index.NirvanaEffects;
 import galena.nirvana.index.NirvanaSounds;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.effects.IStackingEffect;
-import java.util.stream.Stream;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,10 +29,15 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.stream.Stream;
+
 public abstract class SmokingItem extends Item {
 
     public SmokingItem(Properties properties) {
         super(properties);
+    }
+
+    protected void registerDispenserBehaviour() {
         SmokingDispenserBehaviour dispenserBehaviour = (source, pos, look, stack) -> {
             applyEffects(stack, source.getLevel(), Vec3.atCenterOf(source.getPos()), null);
             var mouth = pos.add(look.scale(0.5));

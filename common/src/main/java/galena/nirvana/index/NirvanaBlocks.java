@@ -2,16 +2,17 @@ package galena.nirvana.index;
 
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import galena.nirvana.compat.DyeColors;
 import galena.nirvana.platform.Services;
 import galena.nirvana.world.block.CrateBlock;
 import galena.nirvana.world.block.HempCropBlock;
+import galena.nirvana.world.block.ModdedSkullBlock;
+import galena.nirvana.world.block.ModdedWallSkullBlock;
 import galena.nirvana.world.block.ThcBlock;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -20,11 +21,19 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.GlazedTerracottaBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.WallSkullBlock;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class NirvanaBlocks {
 
@@ -102,6 +111,38 @@ public class NirvanaBlocks {
             .tab(CreativeModeTabs.FUNCTIONAL_BLOCKS)
             .recipe(Services.DATAGEN::thc)
             .build()
+            .register();
+
+    public static final SkullBlock.Type REEFER_SKULL_TYPE = new SkullBlock.Type() {
+    };
+
+    public static final BlockEntry<? extends SkullBlock> REEFER_HEAD = REGISTRATE
+            .block("reefer_head", it -> new ModdedSkullBlock(REEFER_SKULL_TYPE, it))
+            .lang("Reefer Head")
+            .initialProperties(() -> Blocks.CREEPER_HEAD)
+            .blockstate(Services.DATAGEN::skull)
+            .register();
+
+    public static final BlockEntry<? extends WallSkullBlock> REEFER_WALL_HEAD = REGISTRATE
+            .block("reefer_wall_head", it -> new ModdedWallSkullBlock(REEFER_SKULL_TYPE, it))
+            .lang("Reefer Head")
+            .initialProperties(() -> Blocks.CREEPER_WALL_HEAD)
+            .blockstate(Services.DATAGEN::skull)
+            .register();
+
+    public static final BlockEntityEntry<SkullBlockEntity> MODDED_SKULL = REGISTRATE
+            .<SkullBlockEntity>blockEntity("skull", (type, pos, state) -> new SkullBlockEntity(pos, state))
+            .renderer(() -> SkullBlockRenderer::new)
+            .validBlocks(REEFER_HEAD, REEFER_WALL_HEAD)
+            .register();
+
+    public static final BlockEntry<FlowerPotBlock> POTTED_WILD_HEMP = REGISTRATE
+            .block("potted_wild_hemp", it -> new FlowerPotBlock(WILD_HEMP.get(), it))
+            .lang("Potted Hemp")
+            .initialProperties(() -> Blocks.POTTED_CACTUS)
+            .addLayer(() -> RenderType::cutout)
+            .blockstate(Services.DATAGEN::pottedPlant)
+            .loot(Services.DATAGEN::pottedPlant)
             .register();
 
     private static BlockEntry<GlazedTerracottaBlock> createHempBurlap(@Nullable DyeColor color) {
