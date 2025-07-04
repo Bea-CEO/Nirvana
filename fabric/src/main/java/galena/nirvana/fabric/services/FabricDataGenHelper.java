@@ -18,6 +18,7 @@ import galena.nirvana.world.block.HempCropBlock;
 import galena.nirvana.world.item.DeerStalkerItem;
 import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
 import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
+import java.util.function.Function;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -54,8 +55,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Function;
 
 public class FabricDataGenHelper implements IDataGenHelper {
 

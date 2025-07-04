@@ -11,6 +11,9 @@ import galena.nirvana.world.block.HempCropBlock;
 import galena.nirvana.world.block.ModdedSkullBlock;
 import galena.nirvana.world.block.ModdedWallSkullBlock;
 import galena.nirvana.world.block.ThcBlock;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -30,10 +33,6 @@ import net.minecraft.world.level.block.WallSkullBlock;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class NirvanaBlocks {
 
