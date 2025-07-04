@@ -24,7 +24,7 @@ public class PotionBrewingMixin {
     @Inject(cancellable = true, at = @At("HEAD"), method = "mix(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;")
     private static void mix(ItemStack ingredient, ItemStack input, CallbackInfoReturnable<ItemStack> cir) {
         FabricBrewingRegistry.getCustomRecipe(input, ingredient).ifPresent(recipe -> {
-            cir.setReturnValue(recipe.output());
+            cir.setReturnValue(recipe.output().copy());
         });
     }
 
