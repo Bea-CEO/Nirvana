@@ -24,6 +24,7 @@ public class FabricDataGenerators implements DataGeneratorEntrypoint {
         FabricEntrypoint.REGISTRATE.setupDatagen(pack, fileHelper);
         pack.addProvider(AdditionalNirvanaRecipes::new);
         pack.addProvider(PackMetadataProvider::new);
+        pack.addProvider(DataRegistries::new);
     }
 
     private void addDefaultTranslations() {
